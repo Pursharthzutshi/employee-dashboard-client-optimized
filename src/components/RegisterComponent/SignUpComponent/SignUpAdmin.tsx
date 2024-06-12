@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import "./Signup.css"
+import "./SignUpAdmin.css"
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck } from "../../../ReduxSlicers/SignUpSlicer";
 import { redirect, useNavigate } from "react-router-dom";
+import ChangeSignUpFormButtons from "./ChangeSignUpFormButtons";
 
 const signUpquery = gql`
 mutation create($userSignUpParameters: createUserSignUpInput!){
@@ -15,7 +16,7 @@ password
 }
 `
 
-function Signup() {
+function SignupAdmin() {
 
   const userName = useAppSelector((state) => state.SignUpSlicer.userName)
   const userEmailId = useAppSelector((state) => state.SignUpSlicer.userEmailId)
@@ -40,16 +41,17 @@ function Signup() {
 
   return (
     <div>
+      <ChangeSignUpFormButtons/>
       <div className="signup-container">
 
         <div className="signup-box">
-          <h3>Sign Up</h3>
+          <h3>Sign Up Admin</h3>
 
           <form onSubmit={signUpForm} className="signup-form">
 
-            <input type="text" placeholder="Name" onChange={(e) => dispatch(setUserName(e.target.value))} />
-            <input type="text" placeholder="EmailId" onChange={(e) => dispatch(setUserEmailId(e.target.value))} />
-            <input type="password" placeholder="Password" onChange={(e) => dispatch(setEmailPassword(e.target.value))} />
+            <input type="text" placeholder="Admin Name" onChange={(e) => dispatch(setUserName(e.target.value))} />
+            <input type="text" placeholder="Admin EmailId" onChange={(e) => dispatch(setUserEmailId(e.target.value))} />
+            <input type="password" placeholder="Admin Password" onChange={(e) => dispatch(setEmailPassword(e.target.value))} />
             <input type="password" placeholder="Retype Password" onChange={(e) => dispatch(setEmailPasswordRecheck(e.target.value))} />
 
             <button type="submit" onClick={() => {
@@ -75,4 +77,4 @@ function Signup() {
   )
 }
 
-export default Signup;
+export default SignupAdmin;

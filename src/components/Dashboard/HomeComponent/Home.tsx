@@ -20,6 +20,7 @@ import {
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Link } from "react-router-dom";
 import { FaPersonBooth, FaUser } from "react-icons/fa";
+import NavBar from "../../NavBarComponent/NavBar";
 
 // Register the components
 ChartJS.register(
@@ -31,14 +32,11 @@ ChartJS.register(
     Title,
     Tooltip,
     Legend,
-    ArcElement 
+    ArcElement
 );
 
 
 function Home() {
-
-
-    const [test, setTest] = useState(false);
 
     const [chartData, setChartData] = useState<chartDataProps | null>(null)
 
@@ -46,27 +44,10 @@ function Home() {
         setChartData(data);
     })
 
-    const change = () => {
-        setTest(!test)
-    }
-
     return (
         <div className="dashboard">
 
-
-            
-            <div className="nav-bar-search-bar-container">
-
-            <div className="nav-bar-search-bar-div">
-            <input className="nav-bar-search-bar" type="text" placeholder="Search" />
-            </div>
-
-            <div className="nav-bar-profile-icon-div">
-            <FaUser className="user-profile-icon" onClick={() => change()}>Icon</FaUser>
-            <DropDown test={test} />
-            </div>
-
-            </div>
+            <NavBar />
 
             <h3>Dashboard</h3>
             <div className="chart-div-container">
@@ -86,27 +67,27 @@ function Home() {
                         chartData && <Line className="doughnut-chart" data={chartData} />
                     }
                 </div>
-     
+
             </div>
             <div className="chart-div-container">
 
-<div className="bar-chart-div">
-    {
-        chartData && <Pie className="doughnut-chart" data={chartData} />
-    }
-</div>
-<div className="bar-chart-div">
-    <select>
-        <option>Home</option>
-        <option>Home</option>
-        <option>Home</option>
-    </select>
-    {
-        chartData && <Line className="doughnut-chart" data={chartData} />
-    }
-</div>
+                <div className="bar-chart-div">
+                    {
+                        chartData && <Pie className="doughnut-chart" data={chartData} />
+                    }
+                </div>
+                <div className="bar-chart-div">
+                    <select>
+                        <option>Home</option>
+                        <option>Home</option>
+                        <option>Home</option>
+                    </select>
+                    {
+                        chartData && <Line className="doughnut-chart" data={chartData} />
+                    }
+                </div>
 
-</div>
+            </div>
 
             {/* <h3 onClick={change} className="drop-down-label">Select Items</h3>
 
