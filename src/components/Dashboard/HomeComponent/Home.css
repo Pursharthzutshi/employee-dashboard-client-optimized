@@ -1,0 +1,118 @@
+/* Navbar code */
+.nav-bar-search-bar-container{
+    display: flex;
+}
+
+.nav-bar-search-bar-container{
+    flex-direction: row;
+}
+
+.nav-bar-search-bar-container{
+    justify-content: space-between;
+}
+
+.nav-bar-search-bar-div{
+    width: 85%;
+    margin-top: 10px;
+}
+
+.nav-bar-search-bar{
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    outline:none;
+    font-family: "Montserrat";
+    width: 100%;
+    padding: 9px 2px 12px 8px;
+    border: none;
+    box-shadow: .2px .2px 12px .2px rgb(230, 230, 230);
+}
+
+.nav-bar-search-bar:hover{
+    box-shadow: .2px .2px 5px .2px rgb(230, 230, 230);
+    transition: .4s;
+}
+
+
+.user-profile-icon{
+    cursor: pointer;
+    box-shadow: .2px .2px 4px .2px lightgray;
+    border-radius: 200px;
+    padding: 5px 5px 5px 5px;
+    color: lightgray;
+    margin-top: 8px;
+    font-size: 1.5rem;
+    margin-left: 100px;
+}
+.box{
+    position: fixed;
+    left: 88%;
+    top: 6%;
+    width: 10%;
+    height: 10vh;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+}
+
+.links{
+    text-decoration: none;
+    color: black;
+    font-size: .8rem;
+    padding: 12px 2px 12px 12px;
+    list-style: none;
+    margin-top: 0px;
+    /* visibility: hidden; */
+    border: 2px solid white;
+    box-shadow: .2px .2px 1px .2px lightgray;
+}
+
+.links:hover{
+    cursor: pointer;
+    background: whitesmoke;
+}
+
+/* .box:hover li{
+    visibility: visible;
+} */
+
+/* Dashboard code */
+.dashboard{
+    padding:2px 12px 2px 12px;
+    margin-top: 10px;
+    width: 92%;
+    height: 96%;
+    /* box-shadow: .2px .2px 22px .2px rgb(232, 232, 232); */
+}
+
+h3{
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+
+
+.bar-chart-div{
+    margin-left: 20px;
+    margin-top: 40px;
+    width: 33%;
+    height: 20rem;
+}
+
+.doughnut-chart{
+
+    background: transparent;
+    /* width: 10%; */
+    background: rgba(167, 167, 255, 0.038);
+    height: 200px;
+}
+
+
+.chart-div-container{
+    display: flex;
+    gap:40px;
+}

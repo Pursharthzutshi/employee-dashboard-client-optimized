@@ -1,0 +1,48 @@
+.add-task-dialog-box-form,.add-button-div{
+    display: flex;
+}
+
+.add-button-div{
+    display: flex;
+    flex-direction: row;
+}
+
+.add-task-dialog-box-form{
+    flex-direction: column;
+}
+
+.add-task-dialog-box-form{
+    justify-content: space-evenly;
+}
+.add-task-dialog-box-form input{
+    margin-left: 10px;
+    border: none;
+    font-family: "Montserrat";
+    gap:10px;
+    width: 80%;
+    padding:2px 2px 2px 2px;
+    margin-top: 20px;
+    box-shadow: .2px .2px 12px .2px lightgray;
+}
+
+.add-task-dialog-box{
+
+    position: fixed;
+    left: 40%;
+    top:5%;
+    width: 38%;
+    height: auto;
+    box-shadow: .2px .2px 12px .2px lightgray;
+}
+
+.add-button-div{
+    justify-content: center;
+    align-items: center;
+}
+
+.add-button{
+    height: 4vh;
+    width: 20%;
+    margin: 2px 2px 2px 2px;
+    margin-top: 10px;
+}
