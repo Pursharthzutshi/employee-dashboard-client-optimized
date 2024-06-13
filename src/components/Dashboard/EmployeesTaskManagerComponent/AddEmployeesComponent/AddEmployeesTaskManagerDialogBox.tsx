@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../AddEmployeesComponent/AddTaskDialogBox.css"
 import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import DisplayData from "../../HomeComponent/DisplayData";
 import { useAppDispatch, useAppSelector } from "../../../../ReduxHooks/index";
@@ -8,6 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 import AddTaskDialogBoxForm from "../EmployeesTaskManagerDialogBoxForm";
 import EmployeesTaskManagerDialogBoxForm from "../EmployeesTaskManagerDialogBoxForm";
 
+import "../AddEmployeesComponent/AddEmployeesTaskManagerDialogBox.css"
+import "../TaskDialogBox.css"
 
 type addTaskDialogBoxProps = {
     setAddTaskDialogBox: React.Dispatch<React.SetStateAction<Boolean>>;
@@ -36,9 +37,9 @@ function AddEmployeesTaskManagerDialogBox() {
     const [addTasks] = useMutation(addEmployeesTask);
 
     return (
-        <div className="add-task-dialog-box">
+        <div className="task-dialog-box">
 
-            <form className="add-task-dialog-box-form">
+            <form className="task-dialog-box-form">
 
                 <EmployeesTaskManagerDialogBoxForm />
 
@@ -55,7 +56,7 @@ function AddEmployeesTaskManagerDialogBox() {
                             }
                         }
                     })}
-                        className="add-button">Add A New Task</button>
+                        className="add-button">Add Task</button>
                 </div>
             </form>
         </div>

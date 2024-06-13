@@ -27,68 +27,74 @@ mutation dq($employeeUidParameter: deleteEmployeesTaskInput!){
 
 function ShowEmployeesTask() {
 
-  const [selectedUpdateTaskFieldUid,setSelectedUpdateTaskFieldUid] = useState<string>("");
+  const [selectedUpdateTaskFieldUid, setSelectedUpdateTaskFieldUid] = useState<string>("");
 
-  const {data:employeesTaskData,loading} = useQuery(fetch_employees_task_details_query)
+  const { data: employeesTaskData, loading } = useQuery(fetch_employees_task_details_query)
 
-  const [editDialogBox,setEditDialogBox] = useState<Boolean>(false);
+  const [editDialogBox, setEditDialogBox] = useState<Boolean>(false);
 
   const [deleteEmployeeTaskData] = useMutation(delete_employees_task_data,
     {
-      refetchQueries:[{query:fetch_employees_task_details_query}]
+      refetchQueries: [{ query: fetch_employees_task_details_query }]
 
     }
   );
 
-    
+
   const editdialogBox = useAppSelector((state) => state.ShowEmployeesDialogBoxSlicer.showEmployeesEditDialogBox)
 
   const Dispatch = useAppDispatch();
 
 
-  const showEditDialogBox = (val:any)=>{
+  const showEditDialogBox = (val: any) => {
     Dispatch(setShowEmployeesEditDialogBox(true));
     console.log(val)
     setSelectedUpdateTaskFieldUid(val)
   }
 
-  useEffect(()=>{
-    console.log(employeesTaskData)  
+  useEffect(() => {
+    console.log(employeesTaskData)
   })
   if (loading) return <p>Loading...</p>;
 
   return (
-        <div>
-            {
-                employeesTaskData.fetchEmployeesTaskDetails.map((val:any)=>{
-                  console.log(val)
-                    return(
-                        <div>
-                          <p>{val.uid}</p>
-                            <p>{val.name}</p>
-                            <p>{val.deadLine}</p>
-                            <p className="emailid">{val.emailId}</p>
-                            
-                            <button onClick={()=>{deleteEmployeeTaskData({
-                                variables:{
-                                  employeeUidParameter:{
-                                        uid:val.uid
-                                    }
-                                }
-                            })}}>Delete</button>
-                            
-                            <button onClick={()=>showEditDialogBox(val.uid)}>Edit</button>
-                            
-                            </div>
-                    )
-                })
-            }
+    <div className="employees-task-data-container">
+      {
+        employeesTaskData.fetchEmployeesTaskDetails.map((val: any) => {
+          console.log(val)
+          return (
+            <div className="employees-task-data-div">
+              {/* <p>{val.uid}</p> */}
 
-            {
-              editdialogBox && <EditEmployeesTaskManagerDialogBox  selectedUpdateTaskFieldUid={selectedUpdateTaskFieldUid}/>
-            }
-        </div>
-    )
+              <h3>{val.name}</h3>
+              <span>{val.taskDesc}</span>
+              <p>{val.deadLine}</p>
+
+              <span>Assinged to:{val.emailId}</span>
+
+              <p className="emailid">{val.emailId}</p>
+
+              <button className="employees-task-edit-dialog-box-button" onClick={() => showEditDialogBox(val.uid)}>Edit</button>
+              <button className="employees-task-delete-button" onClick={() => {
+                deleteEmployeeTaskData({
+                  variables: {
+                    employeeUidParameter: {
+                      uid: val.uid
+                    }
+                  }
+                })
+              }}>Delete Task</button>
+
+            </div>
+          )
+        })
+      }
+
+      {
+        editdialogBox && <EditEmployeesTaskManagerDialogBox selectedUpdateTaskFieldUid={selectedUpdateTaskFieldUid} />
+      }
+    </div>
+  )
 }
 
 export default ShowEmployeesTask;

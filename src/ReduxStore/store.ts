@@ -6,6 +6,7 @@ import ShowEmployeesDialogBoxSlicer from "../ReduxSlicers/ShowEmployeesDialogBox
 import LocalStorageSlicer from "../ReduxSlicers/LocalStorageSlicer";
 import ChangeSignUpFormSlicer from "../ReduxSlicers/ChangeSignUpFormSlicer";
 import ChangeComponentsState from "../ReduxSlicers/ChangeComponentsState";
+import ShowTaskAssignEmployeeInDialogBoxSlicer from "../ReduxSlicers/ShowTaskAssignEmployeeInDialogBoxSlicer";
 // import BoardSlicer from "../components/slicers/BoardSlicer";
 // import counterSlice from "./slices/counter";
 
@@ -17,7 +18,8 @@ export const store = configureStore({
     ShowEmployeesDialogBoxSlicer:ShowEmployeesDialogBoxSlicer,
     LocalStorageSlicer:LocalStorageSlicer,
     ChangeSignUpFormSlicer:ChangeSignUpFormSlicer,
-    ChangeComponentsState:ChangeComponentsState
+    ChangeComponentsState:ChangeComponentsState,
+    ShowTaskAssignEmployeeInDialogBoxSlicer:ShowTaskAssignEmployeeInDialogBoxSlicer
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 
   },

@@ -1,0 +1,84 @@
+.task-dialog-box-form,.close-dialog-box-icon-div {
+    display: flex;
+}
+
+.task-dialog-box-form,
+.add-button-div,.task-dialog-box-form  {
+    display: flex;
+}
+
+.task-dialog-box-form {
+    flex-direction: column;
+}
+
+.task-dialog-box-form {
+    background: white;
+    justify-content: space-evenly;
+}
+
+.task-dialog-box-form input {
+
+    margin-left: 10px;
+    border: none;
+    font-family: "Montserrat";
+    gap: 10px;
+    width: 90%;
+    padding: 4px 2px 4px 7px;
+    margin-top: 20px;
+    box-shadow: .2px .2px 4px .2px lightgray;
+}
+
+.add-new-task-heading{
+    margin-top: -15px;
+    color:rgb(0, 66, 104);
+}
+
+.task-dialog-box {
+    padding: 22px 2px 22px 12px;
+    position: fixed;
+    z-index: +1;
+    background: white;
+    left: 35%;
+    top: 5%;
+    width: 38%;
+    height: auto;
+    box-shadow: .2px .2px 12px .2px lightgray;
+}
+
+.close-dialog-box-icon-div{
+    color:red;
+    padding: 0px 18px 2px 12px;
+    justify-content: end;
+}
+
+.close-dialog-box-icon{
+    padding: 2px 3px 2px 3px;
+    background: linear-gradient(to left,rgb(217, 0, 0),rgb(255, 0, 0));
+    /* border: 2px solid rgb(52, 0, 0); */
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1rem;
+
+}
+
+.close-dialog-box-icon:hover{
+    cursor: pointer;
+    background: white;
+    color:red;
+    transition: .4s;
+}
+
+.add-button,.employees-task-edit-dialog-box-button,.employees-task-delete-button{
+    border: none;
+    color:white;
+    font-family: "Montserrat";
+    padding:4px 12px 4px 12px;
+    margin-left: 10px;
+    border-radius: 4px;
+}
+
+.add-button,.employees-task-edit-dialog-box-button{
+    background: linear-gradient(to left,rgb(0, 113, 212),rgb(0, 85, 170));
+}
+
+

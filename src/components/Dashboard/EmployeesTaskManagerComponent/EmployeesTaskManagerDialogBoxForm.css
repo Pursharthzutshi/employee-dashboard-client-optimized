@@ -1,0 +1,12 @@
+.calendar{
+    background: red;
+}
+
+.employee-dialog-box-div{
+    display: flex;
+}
+
+.employee-dialog-box-div{
+    flex-direction: column;
+}
+

@@ -1,11 +1,12 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
-import "../ShowEmployeesDataComponent/ShowEmployeesTask.css"
-import "../EditEmployeesDataComponents/EditEmployeesTaskDetailsDialogBox.css"
 import { useAppDispatch, useAppSelector } from "../../../../ReduxHooks";
-import { setShowEmployeesDialogBox } from "../../../../ReduxSlicers/ShowEmployeesDialogBoxSlicer";
+import { setShowEmployeesDialogBox, setShowEmployeesEditDialogBox } from "../../../../ReduxSlicers/ShowEmployeesDialogBoxSlicer";
 import EmployeesTaskManagerDialogBoxForm from "../EmployeesTaskManagerDialogBoxForm";
 import { v4 as uuidv4 } from 'uuid';
+
+import "../ShowEmployeesDataComponent/ShowEmployeesTask.css"
+import "../TaskDialogBox.css"
 
 const fetch_employees_task_details_query = gql`
 query fetchEmployeesDetails{
@@ -41,7 +42,8 @@ function EditEmployeesTaskManagerDialogBox({ selectedUpdateTaskFieldUid }: EditE
     const employeeTaskDesc = useAppSelector((state) => state.AddEmployeesTaskSlicer.employeeTaskDesc)
     const employeeDeadLine = useAppSelector((state) => state.AddEmployeesTaskSlicer.employeeDeadLine)
 
-
+    const Dispatch = useAppDispatch()
+    
     const { data: employeesTaskData, loading } = useQuery(fetch_employees_task_details_query)
 
     const [editEmployeesTaskFields] = useMutation(edit_employees_task_details_query)
@@ -56,13 +58,18 @@ function EditEmployeesTaskManagerDialogBox({ selectedUpdateTaskFieldUid }: EditE
     // const closeEditDialogBox = () => {
     //     Dispatch(setShowEmployeesDialogBox(false));
     // }
+    
+    const closeDialogBox = () => {
+        Dispatch(setShowEmployeesDialogBox(false));
+        Dispatch(setShowEmployeesEditDialogBox(false));
+    }
 
     return (
-        <div className="edit-task-dialog-box">
-            <form className="add-task-dialog-box-form">
+        <div className="task-dialog-box">
+            <form className="task-dialog-box-form">
 
                 <EmployeesTaskManagerDialogBoxForm />
-                <div className="add-button-div">
+                <div className="edit-button-div">
                     <button onClick={() => editEmployeesTaskFields({
                         variables: {
                             editEmployeesTaskParameter: {
@@ -74,7 +81,9 @@ function EditEmployeesTaskManagerDialogBox({ selectedUpdateTaskFieldUid }: EditE
                             }
                         }
                     })}
-                        className="add-button">Edit A New Task</button>
+                        className="edit-button">Edit A New Task</button>
+                    <button className="close-dialog-box-icon" onClick={closeDialogBox}>Cancel</button>
+
                 </div>
 
             </form>

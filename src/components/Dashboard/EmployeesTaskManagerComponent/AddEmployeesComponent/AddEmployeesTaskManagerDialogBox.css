@@ -1,0 +1,24 @@
+.add-button-div{
+    display: flex;
+}
+
+.add-button-div{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.add-button-div{
+    justify-content: center;
+    align-items: center;
+    /* padding: 2px 2px 2px 2px; */
+}
+
+.add-button{
+
+    height: 4vh;
+    margin: 2px 2px 2px 2px;
+    margin-top: 10px;
+}
+
+
