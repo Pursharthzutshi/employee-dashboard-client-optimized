@@ -21,9 +21,9 @@ import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Link } from "react-router-dom";
 import { FaPersonBooth, FaUser } from "react-icons/fa";
 import NavBar from "../../NavBarComponent/NavBar";
-import { gql, useLazyQuery, useQuery, useSubscription } from "@apollo/client";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
-import { setCount, setGenderTypeCount } from "../../../ReduxSlicers/ChartsDetailsSlicer";
+
 // Register the components
 ChartJS.register(
     CategoryScale,
@@ -38,7 +38,7 @@ ChartJS.register(
 );
 
 const show_all_employees_data_query = gql`
-query qd {
+query qd{
  showAllEmployee {
    genderType
  }
@@ -46,41 +46,47 @@ query qd {
 
 function Home() {
 
-    const { data: genderType,refetch } = useQuery(show_all_employees_data_query, {
-    });
+    const {data:genderType} = useQuery(show_all_employees_data_query);
 
     const [chartData, setChartData] = useState<chartDataProps | null>(null)
 
-    // const[count,setCount] = useState(0);
+    const [male,setMale] = useState(0);
+
+    const [female,setFemale] = useState(0);
+
+    const [others,setOthers] = useState(0);
+
     const Dispatch = useAppDispatch()
 
-    const maleCount = useAppSelector((state) => state.ChartsDetailsSlicer.maleCount)
-    const femaleCount = useAppSelector((state) => state.ChartsDetailsSlicer.femaleCount)
-
-    const count = useAppSelector((state) => state.ChartsDetailsSlicer.count)
-
-
+    const genderTypeCount = useAppSelector((state)=>state.ChartsDetailsSlicer.genderTypeCount)
+    
     useEffect(() => {
-
-        if (genderType && genderType.showAllEmployee) {
-
-            const totalGenderTypeCounts = genderType.showAllEmployee.length
-            if (count !== genderType.showAllEmployee.length) {
-                genderType.showAllEmployee.map((val: any) => {
-                    return Dispatch(setGenderTypeCount(val))
-                })
+        setChartData(data);
+        let maleCount= 0
+        let femaleCount= 0
+        let others = 0;
+        
+        genderType.showAllEmployee.map((val:any)=>{
+            console.log(val)
+            
+            if(val.genderTypeCount === "male"){
+                maleCount++
             }
-            console.log(totalGenderTypeCounts)
-            Dispatch(setCount(totalGenderTypeCounts))
-        }
 
-    }, [genderType])
+            if(val.genderTypeCount === "female"){
+                femaleCount++
+            }
 
-    useEffect(() => {
-        console.log(maleCount)
+            if(val.genderTypeCount === "others"){
+                others
+            }
 
-        console.log(femaleCount)
+        })
+        setMale(maleCount)
+        setFemale(femaleCount);
+    console.log(male)
     })
+    
 
     return (
         <div className="dashboard">
@@ -136,4 +142,3 @@ function Home() {
 }
 
 export default Home;
-

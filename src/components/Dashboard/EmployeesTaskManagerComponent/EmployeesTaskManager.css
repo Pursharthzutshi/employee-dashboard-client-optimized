@@ -1,5 +1,13 @@
 .tasks-component{
     padding:2px 12px 2px 12px;
-    height: 100vh;
+}
+.employee-task-manager-component{
+    height: 100%;
+}
 
+.tasks-component{
+    box-shadow: .2px .2px 22px .2px rgb(232, 232, 232);
+    /* height: 100vh; */
+    min-height: 93vh;
+    padding:2px 2px 32px 12px;
 }

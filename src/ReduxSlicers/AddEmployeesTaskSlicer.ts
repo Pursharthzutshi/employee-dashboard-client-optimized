@@ -4,15 +4,17 @@ type initialStateProps = {
     employeeName: String,
     employeeEmailId: [String],
     employeeTaskDesc: String,
-    employeeDeadLine: String
+    employeeDeadLine: String,
+    alreadyAddedEmployeeStatus: boolean
+
 }
 
-const initialState:initialStateProps = {
+const initialState: initialStateProps = {
     employeeName: "",
     employeeEmailId: [""],
     employeeTaskDesc: "",
-    employeeDeadLine: ""
-
+    employeeDeadLine: "",
+    alreadyAddedEmployeeStatus: false
 }
 
 export const AddEmployeesTaskSlicer = createSlice({
@@ -23,19 +25,24 @@ export const AddEmployeesTaskSlicer = createSlice({
             state.employeeName = action.payload;
         },
         SetEmployeeEmailId: (state, action) => {
+            console.log(action.payload)
+
             state.employeeEmailId = action.payload;
         },
         setEmployeeTaskDesc: (state, action) => {
+            console.log(action.payload)
             state.employeeTaskDesc = action.payload;
 
         },
         setEmployeeDeadLine: (state, action) => {
             state.employeeDeadLine = action.payload;
-
         },
+        setAlreadyAddedEmployeeStatus: (state, action) => {
+            state.alreadyAddedEmployeeStatus = action.payload
+        }
     }
 })
 
-export const { setEmployeeName, SetEmployeeEmailId, setEmployeeTaskDesc, setEmployeeDeadLine } = AddEmployeesTaskSlicer.actions;
+export const { setEmployeeName, SetEmployeeEmailId, setEmployeeTaskDesc, setEmployeeDeadLine, setAlreadyAddedEmployeeStatus } = AddEmployeesTaskSlicer.actions;
 
 export default AddEmployeesTaskSlicer.reducer

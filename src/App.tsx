@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="App">
 
-      <button onClick={() => Dispatch(setChangeComponent(true))}>change</button>
+      {/* <button onClick={() => Dispatch(setChangeComponent(true))}>change</button> */}
 
       <LeftSidebar />
       <Routes>

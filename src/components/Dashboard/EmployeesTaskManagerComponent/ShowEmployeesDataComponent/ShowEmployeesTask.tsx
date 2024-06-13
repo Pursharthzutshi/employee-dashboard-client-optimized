@@ -4,7 +4,9 @@ import "../ShowEmployeesDataComponent/ShowEmployeesTask.css"
 import EditEmployeesTaskDetailsDialogBox from "../EditEmployeesDataComponents/EditEmployeesTaskManagerDialogBox";
 import { setShowEmployeesDialogBox, setShowEmployeesEditDialogBox } from "../../../../ReduxSlicers/ShowEmployeesDialogBoxSlicer";
 import { useAppDispatch, useAppSelector } from "../../../../ReduxHooks";
+
 import EditEmployeesTaskManagerDialogBox from "../EditEmployeesDataComponents/EditEmployeesTaskManagerDialogBox";
+
 const fetch_employees_task_details_query = gql`
 query fetchEmployeesDetails{
  fetchEmployeesTaskDetails{
@@ -45,7 +47,6 @@ function ShowEmployeesTask() {
 
   const Dispatch = useAppDispatch();
 
-
   const showEditDialogBox = (val: any) => {
     Dispatch(setShowEmployeesEditDialogBox(true));
     console.log(val)
@@ -61,30 +62,46 @@ function ShowEmployeesTask() {
     <div className="employees-task-data-container">
       {
         employeesTaskData.fetchEmployeesTaskDetails.map((val: any) => {
-          console.log(val)
+          console.log(val.emailId)
           return (
             <div className="employees-task-data-div">
               {/* <p>{val.uid}</p> */}
 
-              <h3>{val.name}</h3>
-              <span>{val.taskDesc}</span>
+              <div>
+                <br></br>
+                <strong>TASK NAME - : </strong>
+                <p className="task-name">{val.name}</p>
+              </div>
+              <strong>TASK DESCRIPTION - : </strong>
+
+              <p className="task-desc">{val.taskDesc}</p>
               <p>{val.deadLine}</p>
 
-              <span>Assinged to:{val.emailId}</span>
-
-              <p className="emailid">{val.emailId}</p>
-
-              <button className="employees-task-edit-dialog-box-button" onClick={() => showEditDialogBox(val.uid)}>Edit</button>
-              <button className="employees-task-delete-button" onClick={() => {
-                deleteEmployeeTaskData({
-                  variables: {
-                    employeeUidParameter: {
-                      uid: val.uid
-                    }
-                  }
+              <strong>TASK ASSIGNED TO - : </strong>
+              <div className="assigned-to-employee-div">
+                {/* <span>{val.emailId}</span> */}
+              </div>
+              {
+                val.emailId.map((val: any) => {
+                  return <div>
+                    <p>{val}</p>
+                  </div>
                 })
-              }}>Delete Task</button>
+              }
+              {/* <p className="emailid"></p> */}
 
+              <div className="employees-edit-delete-task-button-container">
+                <button className="employees-task-edit-dialog-box-button" onClick={() => showEditDialogBox(val.uid)}>Edit</button>
+                <button className="employees-task-delete-button" onClick={() => {
+                  deleteEmployeeTaskData({
+                    variables: {
+                      employeeUidParameter: {
+                        uid: val.uid
+                      }
+                    }
+                  })
+                }}>Delete Task</button>
+              </div>
             </div>
           )
         })

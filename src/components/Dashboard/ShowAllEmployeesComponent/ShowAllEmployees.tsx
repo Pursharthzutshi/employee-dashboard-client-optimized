@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import "../ShowAllEmployeesComponent/ShowAllEmployees.css"
 import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import NavBar from "../../NavBarComponent/NavBar";
 
+
+import "../ShowAllEmployeesComponent/ShowAllEmployees.css"
 
 function ShowAllEmployees() {
 
@@ -29,19 +30,20 @@ function ShowAllEmployees() {
 
     return (
         <div>
-            
-            <NavBar />
 
-            {
-                ShowAllEmployeesData.showAllEmployee.map((val: any) => {
-                    return (
-                        <div>
-                            <h4>Email ID:</h4><p>{val.emailId}</p>
-                            <h4>Name:</h4><p>{val.name}</p>
-                        </div>
-                    )
-                })
-            }
+            <NavBar />
+            <div className="employees-details-container">
+                {
+                    ShowAllEmployeesData.showAllEmployee.map((val: any) => {
+                        return (
+                            <div className="employees-details-div" >
+                                <strong>Name:</strong><p>{val.name}</p>
+                                <strong>Email ID:</strong><p className="email-id">{val.emailId}</p>
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

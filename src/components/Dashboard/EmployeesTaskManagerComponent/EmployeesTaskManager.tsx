@@ -7,6 +7,11 @@ import { setShowEmployeesDialogBox } from "../../../ReduxSlicers/ShowEmployeesDi
 import AddEmployeesTaskManagerDialogBox from "./AddEmployeesComponent/AddEmployeesTaskManagerDialogBox";
 // import AddTaskkDialogBox from "./AddTaskDialogBox";
 
+import "../../../App.css"
+import "../EmployeesTaskManagerComponent/TaskDialogBox.css"
+import { SetEmployeeEmailId } from "../../../ReduxSlicers/AddEmployeesTaskSlicer";
+
+
 function EmployeesTaskManager() {
 
     // const loggedInSavedEmailId = useAppSelector((state) => state.LocalStorageSlicer.loggedInSavedEmailId)
@@ -18,15 +23,16 @@ function EmployeesTaskManager() {
         Dispatch(setShowEmployeesDialogBox(true));
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         const val = localStorage.getItem('loggedInEmailID')
         console.log(val);
     })
 
     return (
-        <div className="tasks-component">
+        <div className="employee-task-manager-component">
+            <div className="tasks-component">
             <h3>Employees Task</h3>
-            <button onClick={showDialogBox}>Add Posts</button>
+            <button className="add-posts-dialog-box-button" onClick={showDialogBox}>Add Posts</button>
             {
                 dialogBox && <AddEmployeesTaskManagerDialogBox />
             }
@@ -34,6 +40,7 @@ function EmployeesTaskManager() {
 
             <ShowEmployeesTask />
 
+        </div>
         </div>
     )
 }

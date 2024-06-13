@@ -4,7 +4,8 @@ const initialState = {
     userName: "",
     userEmailId: "",
     userEmailPassword: "",
-    userEmailPasswordRecheck: ""
+    userEmailPasswordRecheck: "",
+    genderType:""
     
 }
 
@@ -26,9 +27,14 @@ export const SignUpSlicer = createSlice({
             state.userEmailPasswordRecheck = action.payload;
         },
 
+        setGenderType:(state,action)=>{
+            console.log(action.payload)
+            state.genderType = action.payload;
+        }
+
 
     }
 })
-export const { setUserName, setUserEmailId, setEmailPassword,setEmailPasswordRecheck } = SignUpSlicer.actions;
+export const { setUserName, setUserEmailId, setEmailPassword,setEmailPasswordRecheck,setGenderType } = SignUpSlicer.actions;
 
 export default SignUpSlicer.reducer

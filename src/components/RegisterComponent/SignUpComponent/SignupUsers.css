@@ -20,10 +20,20 @@
 
 .signup-box{
     width: 30%;
-    height: 35%;
+    /* height: 35%; */
     justify-content: space-around;
     padding: 12px 12px 12px 12px;
     box-shadow: .2px .2px 12px .2px whitesmoke;
+}
+
+.gender-cateogry-div{
+    margin-top: 20px;
+}
+
+.gender-type{
+    margin-left:10px ;
+    background-color: none;
+    box-shadow: none;
 }
 
 .signup-box input{

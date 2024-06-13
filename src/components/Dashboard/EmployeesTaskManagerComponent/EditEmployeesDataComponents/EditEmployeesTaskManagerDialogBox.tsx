@@ -81,8 +81,8 @@ function EditEmployeesTaskManagerDialogBox({ selectedUpdateTaskFieldUid }: EditE
                             }
                         }
                     })}
-                        className="edit-button">Edit A New Task</button>
-                    <button className="close-dialog-box-icon" onClick={closeDialogBox}>Cancel</button>
+                        className="edit-new-task-button">Edit A New Task</button>
+                    <button className="close-edit-dialog-box-button" onClick={closeDialogBox}>Cancel</button>
 
                 </div>
 

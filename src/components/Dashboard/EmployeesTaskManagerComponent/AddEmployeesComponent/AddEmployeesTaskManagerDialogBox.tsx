@@ -33,7 +33,7 @@ function AddEmployeesTaskManagerDialogBox() {
 
     const Dispatch = useAppDispatch();
 
-
+ 
     const [addTasks] = useMutation(addEmployeesTask);
 
     return (
@@ -42,9 +42,9 @@ function AddEmployeesTaskManagerDialogBox() {
             <form className="task-dialog-box-form">
 
                 <EmployeesTaskManagerDialogBoxForm />
+             
 
-
-                <div className="add-button-div">
+                <div className="add-new-task-button-div">
                     <button onClick={() => addTasks({
                         variables: {
                             employeesTaskParameters: {
@@ -56,7 +56,7 @@ function AddEmployeesTaskManagerDialogBox() {
                             }
                         }
                     })}
-                        className="add-button">Add Task</button>
+                        className="add-new-task-button">Add Task</button>
                 </div>
             </form>
         </div>

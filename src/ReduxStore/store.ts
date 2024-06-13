@@ -7,6 +7,7 @@ import LocalStorageSlicer from "../ReduxSlicers/LocalStorageSlicer";
 import ChangeSignUpFormSlicer from "../ReduxSlicers/ChangeSignUpFormSlicer";
 import ChangeComponentsState from "../ReduxSlicers/ChangeComponentsState";
 import ShowTaskAssignEmployeeInDialogBoxSlicer from "../ReduxSlicers/ShowTaskAssignEmployeeInDialogBoxSlicer";
+import ChartsDetailsSlicer from "../ReduxSlicers/ChartsDetailsSlicer";
 // import BoardSlicer from "../components/slicers/BoardSlicer";
 // import counterSlice from "./slices/counter";
 
@@ -19,7 +20,8 @@ export const store = configureStore({
     LocalStorageSlicer:LocalStorageSlicer,
     ChangeSignUpFormSlicer:ChangeSignUpFormSlicer,
     ChangeComponentsState:ChangeComponentsState,
-    ShowTaskAssignEmployeeInDialogBoxSlicer:ShowTaskAssignEmployeeInDialogBoxSlicer
+    ShowTaskAssignEmployeeInDialogBoxSlicer:ShowTaskAssignEmployeeInDialogBoxSlicer,
+    ChartsDetailsSlicer:ChartsDetailsSlicer
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 
   },

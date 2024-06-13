@@ -1,15 +1,24 @@
-.dashboard-container{
+html,
+body {
+    height: 100%;
+    /* background: red; */
+}
+
+
+.dashboard-container {
     display: flex;
 }
 
-.dashboard-container{
-    height: 110vh;
+.dashboard-container {
+    background-color: red;
+    box-shadow: .2px .2px 22px .2px rgb(232, 232, 232);
+    height: 100%;
 }
 
-.App{
-    box-shadow: .2px .2px 22px .2px rgb(232, 232, 232);
-
+.App {
     margin-top: 10px;
     width: 92%;
+    /* height: 100%; */
+    background: white;
     margin-left: 100px;
 }

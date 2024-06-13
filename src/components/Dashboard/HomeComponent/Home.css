@@ -8,7 +8,9 @@
     padding:2px 12px 2px 12px;
     margin-top: 10px;
     width: 92%;
-    height: 96%;
+    height: 100%;
+    box-shadow: .2px .2px 22px .2px rgb(232, 232, 232);
+
     /* box-shadow: .2px .2px 22px .2px rgb(232, 232, 232); */
 }
 

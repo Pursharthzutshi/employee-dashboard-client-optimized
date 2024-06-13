@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck } from "../../../ReduxSlicers/SignUpSlicer";
 import { redirect, useNavigate } from "react-router-dom";
 import ChangeSignUpFormButtons from "./ChangeSignUpFormButtons";
+import { v4 as uuidv4 } from 'uuid';
 
 const signUpquery = gql`
 mutation create($userSignUpParameters: createUserSignUpInput!){
@@ -58,6 +59,7 @@ function SignupAdmin() {
               userSignUp({
                 variables: {
                   userSignUpParameters: {
+                    uid:uuidv4(),
                     name: userName,
                     emailId: userEmailId,
                     password: userEmailPassword
