@@ -23,7 +23,8 @@ import { FaPersonBooth, FaUser } from "react-icons/fa";
 import NavBar from "../../NavBarComponent/NavBar";
 import { gql, useLazyQuery, useQuery, useSubscription } from "@apollo/client";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
-import { setCount, setGenderTypeCount } from "../../../ReduxSlicers/ChartsDetailsSlicer";
+import { resetCounts, setCount, setGenderTypeCount } from "../../../ReduxSlicers/ChartsDetailsSlicer";
+import { setSignUpResponseStatus } from "../../../ReduxSlicers/SignUpResponseSlicer";
 // Register the components
 ChartJS.register(
     CategoryScale,
@@ -46,7 +47,8 @@ query qd {
 
 function Home() {
 
-    const { data: genderType,refetch } = useQuery(show_all_employees_data_query, {
+    const { data: genderType, refetch } = useQuery(show_all_employees_data_query, {
+        // pollInterval: 1000, // Polling interval in milliseconds (e.g., every 5 seconds)
     });
 
     const [chartData, setChartData] = useState<chartDataProps | null>(null)
@@ -58,28 +60,42 @@ function Home() {
     const femaleCount = useAppSelector((state) => state.ChartsDetailsSlicer.femaleCount)
 
     const count = useAppSelector((state) => state.ChartsDetailsSlicer.count)
+    const signUpResponseStatus = useAppSelector((state) => state.SignUpResponseSlicer.signUpResponseStatus);
 
 
     useEffect(() => {
 
+        // console.log(signUpResponseStatus);
+
+        if (signUpResponseStatus === true) {
+            Dispatch(resetCounts());
+            Dispatch(setSignUpResponseStatus(false))
+        }
+
         if (genderType && genderType.showAllEmployee) {
 
-            const totalGenderTypeCounts = genderType.showAllEmployee.length
+
             if (count !== genderType.showAllEmployee.length) {
                 genderType.showAllEmployee.map((val: any) => {
                     return Dispatch(setGenderTypeCount(val))
                 })
             }
-            console.log(totalGenderTypeCounts)
+            // console.log(totalGenderTypeCounts)
+            const totalGenderTypeCounts = genderType.showAllEmployee.length
             Dispatch(setCount(totalGenderTypeCounts))
+            refetch()
         }
+        // Dispatch(setSignUpResponseStatus(false))
+        // console.log(signUpResponseStatus);
+
 
     }, [genderType])
 
     useEffect(() => {
-        console.log(maleCount)
-
-        console.log(femaleCount)
+        console.log("Total count", count)
+        console.log("male count", maleCount)
+        console.log("female count", femaleCount)
+        // console.log(others)
     })
 
     return (

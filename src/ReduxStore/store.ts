@@ -8,6 +8,7 @@ import ChangeSignUpFormSlicer from "../ReduxSlicers/ChangeSignUpFormSlicer";
 import ChangeComponentsState from "../ReduxSlicers/ChangeComponentsState";
 import ShowTaskAssignEmployeeInDialogBoxSlicer from "../ReduxSlicers/ShowTaskAssignEmployeeInDialogBoxSlicer";
 import ChartsDetailsSlicer from "../ReduxSlicers/ChartsDetailsSlicer";
+import SignUpResponseSlicer from "../ReduxSlicers/SignUpResponseSlicer";
 // import BoardSlicer from "../components/slicers/BoardSlicer";
 // import counterSlice from "./slices/counter";
 
@@ -21,7 +22,8 @@ export const store = configureStore({
     ChangeSignUpFormSlicer:ChangeSignUpFormSlicer,
     ChangeComponentsState:ChangeComponentsState,
     ShowTaskAssignEmployeeInDialogBoxSlicer:ShowTaskAssignEmployeeInDialogBoxSlicer,
-    ChartsDetailsSlicer:ChartsDetailsSlicer
+    ChartsDetailsSlicer:ChartsDetailsSlicer,
+    SignUpResponseSlicer:SignUpResponseSlicer
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 
   },

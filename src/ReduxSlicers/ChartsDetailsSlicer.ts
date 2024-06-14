@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 type genderTypeCountProps = {
-    count:number
+    count: number
     maleCount: number
     femaleCount: number
     othersCount: number
 }
 
 const initialState: genderTypeCountProps = {
-    count:0,
+    count: 0,
     maleCount: 0,
     femaleCount: 0,
     othersCount: 0,
@@ -20,7 +20,7 @@ export const ChangeSignUpFormSlicer = createSlice({
     reducers: {
         setGenderTypeCount: (state, action) => {
 
-            // console.log(action.payload)
+
 
             if (action.payload.genderType === "male") {
                 state.maleCount = state.maleCount + 1
@@ -29,21 +29,26 @@ export const ChangeSignUpFormSlicer = createSlice({
             else if (action.payload.genderType === "female") {
                 state.femaleCount = state.femaleCount + 1
             }
-            else {
+            else if (action.payload.genderType === "others") {
                 state.othersCount = state.othersCount + 1
             }
 
-            // console.log(state.maleCount)
 
 
         },
-        setCount:(state,action)=>{
+        setCount: (state, action) => {
             state.count = action.payload;
 
-        }
+        },
+        resetCounts: (state) => {
+            state.maleCount = 0;
+            state.femaleCount = 0;
+            state.othersCount = 0;
+            state.count = 0;
+          },
     }
 })
 
-export const { setGenderTypeCount,setCount } = ChangeSignUpFormSlicer.actions;
+export const { setGenderTypeCount, setCount,resetCounts } = ChangeSignUpFormSlicer.actions;
 
 export default ChangeSignUpFormSlicer.reducer

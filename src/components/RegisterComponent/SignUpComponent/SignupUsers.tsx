@@ -6,13 +6,13 @@ import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck,
 import { redirect, useNavigate } from "react-router-dom";
 import ChangeSignUpFormButtons from "./ChangeSignUpFormButtons";
 import { v4 as uuidv4 } from 'uuid';
+import { setSignUpResponseStatus } from "../../../ReduxSlicers/SignUpResponseSlicer";
 
 const signUpquery = gql`
 mutation create($userSignUpParameters: createUserSignUpInput!){
 createUserSignUp(userSignUpParameters: $userSignUpParameters) {
-name,
-emailId,
-password
+success
+message
 }
 }
 `
@@ -35,15 +35,28 @@ function SignupUsers() {
     navigate("/")
   }
 
-  const [userSignUp, { loading }] = useMutation(signUpquery);
   useEffect(() => {
-    const res = userSignUp
-    console.log(res)
+
   })
+
+  const signUpResponseStatus = useAppSelector((state)=>state.SignUpResponseSlicer.signUpResponseStatus);
+
+  const [userSignUp, { data: signUpResponseData, loading }] = useMutation(signUpquery,{
+
+    onCompleted:(data)=>{
+      console.log(data.createUserSignUp.success)
+      if (data.createUserSignUp.success === true) {
+        dispatch(setSignUpResponseStatus(true))
+      }
+    }
+  });
+  useEffect(() => {
+    console.log(signUpResponseStatus)
+  },[])
 
   return (
     <div>
-            <ChangeSignUpFormButtons/>
+      <ChangeSignUpFormButtons />
 
       <div className="signup-container">
 
@@ -54,30 +67,30 @@ function SignupUsers() {
 
             <input type="text" placeholder="Name" onChange={(e) => dispatch(setUserName(e.target.value))} />
             <input type="text" placeholder="EmailId" onChange={(e) => dispatch(setUserEmailId(e.target.value))} />
-            <input type="password" placeholder="Password" onChange={(e) => dispatch(setEmailPassword(e.target.value))} />        
+            <input type="password" placeholder="Password" onChange={(e) => dispatch(setEmailPassword(e.target.value))} />
             <input type="category" placeholder="Retype Password" onChange={(e) => dispatch(setEmailPasswordRecheck(e.target.value))} />
-            
+
             <div className="gender-cateogry-div">
-              <input onChange={(e)=>dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="male" type="radio"/>
+              <input onChange={(e) => dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="male" type="radio" />
               <label>Male</label>
-              <input onChange={(e)=>dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="female" type="radio"/>
+              <input onChange={(e) => dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="female" type="radio" />
               <label>Female</label>
-              <input onChange={(e)=>dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="others" type="radio"/>
+              <input onChange={(e) => dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="others" type="radio" />
               <label>Others</label>
             </div>
             <button type="submit" onClick={() => {
               userSignUp({
                 variables: {
                   userSignUpParameters: {
-                    uid:uuidv4(),
+                    uid: uuidv4(),
                     name: userName,
                     emailId: userEmailId,
                     password: userEmailPassword,
-                    genderType:genderType
+                    genderType: genderType
                   },
                 },
               })
-              
+
             }}>Sign Up</button>
             {/* {
               d
