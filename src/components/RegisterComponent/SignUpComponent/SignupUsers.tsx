@@ -86,7 +86,8 @@ function SignupUsers() {
                     name: userName,
                     emailId: userEmailId,
                     password: userEmailPassword,
-                    genderType: genderType
+                    genderType: genderType,
+                    status:false
                   },
                 },
               })

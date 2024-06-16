@@ -4,14 +4,17 @@ import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserLoggedInEmailId, setUserLoggedInEmailPassword } from "../../../ReduxSlicers/LoginSlicer";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-import { setLoggedInSavedEmailId } from "../../../ReduxSlicers/LocalStorageSlicer";
+import { setAdminStatus, setLoggedInSavedUid, setLogOutStatus, setShowLogOutButtonElements } from "../../../ReduxSlicers/LocalStorageSlicer";
 import ChangeLogInFormButtons from "./ChangeLogInFormButtons";
 
 const checkUserLoggedInAuthQuery = gql`
-mutation userLogin($userLoginParameters: createLoginInput!){
-  createUserLogin(userLoginParameters: $userLoginParameters) {
-  success
-  message
+mutation adminLogin($adminLoginParameters: createAdminLoginInput!){
+  createAdminLogin(adminLoginParameters: $adminLoginParameters) {
+  uid
+    success
+    message
+    token
+    admin
   }
 }
 `
@@ -22,29 +25,33 @@ function LoginAdmin() {
     const userLoggedinEmailId = useAppSelector((state) => state.LoginSlicer.userLoggedinEmailId)
     const userLoggedInEmailPassword = useAppSelector((state) => state.LoginSlicer.userLoggedinPassword)
 
-    const dispatch = useAppDispatch()
+    
+    const Dispatch = useAppDispatch()
     // const [] = useState("");
     // const [] = useState()
     const navigate = useNavigate()
 
-    const [checkUserLoggedInAuth] = useMutation(checkUserLoggedInAuthQuery, {
+    const [checkAdminLoggedInAuth] = useMutation(checkUserLoggedInAuthQuery, {
         onCompleted: (data) => {
 
-            console.log(data)
-            if (data.createUserLogin.success === true) {
+            if (data.createAdminLogin.success === true) {
+                if(data.createAdminLogin.admin === true){
+                    Dispatch(setAdminStatus(true))
+                }
                 console.log(false);
                 navigate("/")
-                dispatch(setLoggedInSavedEmailId(userLoggedinEmailId));
+                Dispatch(setShowLogOutButtonElements(true));
+                Dispatch(setLoggedInSavedUid(data.createAdminLogin.uid));
             } else {
-                console.log(true);
-
+                Dispatch(setShowLogOutButtonElements(false));
             }
-            // Optionally refetch data here
         },
     });
 
 
-
+useEffect(()=>{
+    console.log(checkAdminLoggedInAuth)
+})
     const loginForm = (e: any) => {
         e.preventDefault()
 
@@ -56,13 +63,13 @@ function LoginAdmin() {
             <ChangeLogInFormButtons/>
             <form onSubmit={loginForm}>
                 <h3>Admin Login In Form</h3>
-                <input type="text" placeholder="EmailId" onChange={(e) => dispatch(setUserLoggedInEmailId(e.target.value))} />
-                <input type="password" placeholder="password" onChange={(e) => dispatch(setUserLoggedInEmailPassword(e.target.value))} />
+                <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserLoggedInEmailId(e.target.value))} />
+                <input type="password" placeholder="password" onChange={(e) => Dispatch(setUserLoggedInEmailPassword(e.target.value))} />
                 <button onClick={() => {
                     {
-                        checkUserLoggedInAuth({
+                        checkAdminLoggedInAuth({
                             variables: {
-                                userLoginParameters: {
+                                adminLoginParameters: {
                                     emailId: userLoggedinEmailId,
                                     password: userLoggedInEmailPassword
                                 }

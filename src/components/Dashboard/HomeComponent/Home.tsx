@@ -1,5 +1,4 @@
 import "../HomeComponent/Home.css"
-import { chartDataProps, data } from "./Data";
 import { useEffect, useState } from "react";
 import Dropdown from 'react-dropdown';
 import DropDown from "../../utils/DropDown"
@@ -17,6 +16,7 @@ import {
     ArcElement
 
 } from 'chart.js';
+
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Link } from "react-router-dom";
 import { FaPersonBooth, FaUser } from "react-icons/fa";
@@ -25,6 +25,10 @@ import { gql, useLazyQuery, useQuery, useSubscription } from "@apollo/client";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { resetCounts, setCount, setGenderTypeCount } from "../../../ReduxSlicers/ChartsDetailsSlicer";
 import { setSignUpResponseStatus } from "../../../ReduxSlicers/SignUpResponseSlicer";
+import DataFile from "./DataFile";
+import EmployeeStatus from "./EmployeeStatusComponent/EmployeeStatus";
+import CheckInStatus from "./EmployeeStatusComponent/CheckInStatusComponent/CheckInStatus";
+
 // Register the components
 ChartJS.register(
     CategoryScale,
@@ -47,25 +51,18 @@ query qd {
 
 function Home() {
 
-    const { data: genderType, refetch } = useQuery(show_all_employees_data_query, {
-        // pollInterval: 1000, // Polling interval in milliseconds (e.g., every 5 seconds)
-    });
 
-    const [chartData, setChartData] = useState<chartDataProps | null>(null)
-
-    // const[count,setCount] = useState(0);
-    const Dispatch = useAppDispatch()
-
-    const maleCount = useAppSelector((state) => state.ChartsDetailsSlicer.maleCount)
-    const femaleCount = useAppSelector((state) => state.ChartsDetailsSlicer.femaleCount)
+    const { data: genderType, refetch } = useQuery(show_all_employees_data_query);
 
     const count = useAppSelector((state) => state.ChartsDetailsSlicer.count)
     const signUpResponseStatus = useAppSelector((state) => state.SignUpResponseSlicer.signUpResponseStatus);
 
 
-    useEffect(() => {
 
-        // console.log(signUpResponseStatus);
+    const Dispatch = useAppDispatch()
+
+
+    useEffect(() => {
 
         if (signUpResponseStatus === true) {
             Dispatch(resetCounts());
@@ -80,73 +77,43 @@ function Home() {
                     return Dispatch(setGenderTypeCount(val))
                 })
             }
-            // console.log(totalGenderTypeCounts)
             const totalGenderTypeCounts = genderType.showAllEmployee.length
             Dispatch(setCount(totalGenderTypeCounts))
             refetch()
         }
-        // Dispatch(setSignUpResponseStatus(false))
-        // console.log(signUpResponseStatus);
 
 
     }, [genderType])
 
-    useEffect(() => {
-        console.log("Total count", count)
-        console.log("male count", maleCount)
-        console.log("female count", femaleCount)
-        // console.log(others)
-    })
+
 
     return (
         <div className="dashboard">
-
+            
+            
             <NavBar />
+            <CheckInStatus/>
 
-            <h3>Dashboard</h3>
+            <h3>Home</h3>
             <div className="chart-div-container">
 
-                <div className="bar-chart-div">
-                    {
-                        chartData && <Bar className="doughnut-chart" data={chartData} />
-                    }
-                </div>
-                <div className="bar-chart-div">
-                    <select>
-                        <option>Home</option>
-                        <option>Home</option>
-                        <option>Home</option>
-                    </select>
-                    {
-                        chartData && <Line className="doughnut-chart" data={chartData} />
-                    }
-                </div>
-
+                <DataFile />
+                <DataFile />
             </div>
             <div className="chart-div-container">
 
-                <div className="bar-chart-div">
-                    {
-                        chartData && <Pie className="doughnut-chart" data={chartData} />
-                    }
-                </div>
-                <div className="bar-chart-div">
-                    <select>
-                        <option>Home</option>
-                        <option>Home</option>
-                        <option>Home</option>
-                    </select>
-                    {
-                        chartData && <Line className="doughnut-chart" data={chartData} />
-                    }
-                </div>
 
-            </div>
+                <DataFile />
 
-            {/* <h3 onClick={change} className="drop-down-label">Select Items</h3>
-
-            <DropDown test={test}/>
+                {/* <DataFile />
  */}
+
+                <EmployeeStatus />
+                {/* <iframe>
+
+            </iframe> */}
+            </div>
+
         </div>
     )
 }

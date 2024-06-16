@@ -8,13 +8,14 @@ import ShowAllEmployees from './components/Dashboard/ShowAllEmployeesComponent/S
 import SignUp from './components/RegisterComponent/SignUpComponent/ChangeSignUpFormButtons';
 import SignupUsers from './components/RegisterComponent/SignUpComponent/SignupUsers';
 import SignupAdmin from './components/RegisterComponent/SignUpComponent/SignUpAdmin';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './ReduxHooks';
 import LoginUsers from './components/RegisterComponent/LoginComponent/LoginUsers';
 import LoginAdmin from './components/RegisterComponent/LoginComponent/LoginAdmin';
 import AssignedEmployeesTask from './components/Dashboard/UserComponents/AssignedEmployeesTask';
 import { setChangeComponent } from './ReduxSlicers/ChangeComponentsState';
 import EmployeesHome from './components/Dashboard/UserComponents/EmployeesHome';
+import { setLogOutStatus } from './ReduxSlicers/LocalStorageSlicer';
 
 
 function App() {
@@ -27,7 +28,32 @@ function App() {
 
   const ChangeComponentsState = useAppSelector((state) => state.ChangeComponentsState.changeComponent);
 
+
+  const logOutStatus = useAppSelector((state) => state.LocalStorageSlicer.logOutStatus)
+
   const Dispatch = useAppDispatch();
+
+  // const [showLogOutStatus,setShowLogoutStatus] = useState(false);
+
+
+  const [showLoggedInType, setShowLoggedInType] = useState<Boolean>(false);
+
+  useEffect(() => {
+    const adminLoggedInSavedUid = localStorage.getItem("adminLoggedInSavedUid")
+    if (adminLoggedInSavedUid) {
+      setShowLoggedInType(true)
+    }else{
+      setShowLoggedInType(false)
+
+    }
+    // const employeeLoggedInSavedUid = localStorage.getItem("loggedInSavedUid")
+
+    // if (employeeLoggedInSavedUid) {
+    //   setShowLoggedInType(false)
+    // }
+    console.log(adminLoggedInSavedUid)
+    
+  },[])
   return (
     <div className="App">
 
@@ -37,12 +63,12 @@ function App() {
       <Routes>
         <Route path="/" element=
           {
-            ChangeComponentsState ? <Home />:<EmployeesHome/>
+            showLoggedInType ? <Home /> : <EmployeesHome />
           }
         />
         <Route path="/employeesTaskManagmentPage" element={
 
-          ChangeComponentsState ? <EmployeesTaskManager /> : <AssignedEmployeesTask />
+          showLoggedInType ? <EmployeesTaskManager /> : <AssignedEmployeesTask />
         }
         />
 

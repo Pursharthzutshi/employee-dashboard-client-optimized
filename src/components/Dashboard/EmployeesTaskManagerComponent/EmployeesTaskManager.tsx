@@ -10,6 +10,7 @@ import AddEmployeesTaskManagerDialogBox from "./AddEmployeesComponent/AddEmploye
 import "../../../App.css"
 import "../EmployeesTaskManagerComponent/TaskDialogBox.css"
 import { SetEmployeeEmailId } from "../../../ReduxSlicers/AddEmployeesTaskSlicer";
+import NavBar from "../../NavBarComponent/NavBar";
 
 
 function EmployeesTaskManager() {
@@ -31,6 +32,7 @@ function EmployeesTaskManager() {
     return (
         <div className="employee-task-manager-component">
             <div className="tasks-component">
+            <NavBar/>
             <h3>Employees Task</h3>
             <button className="add-posts-dialog-box-button" onClick={showDialogBox}>Add Posts</button>
             {

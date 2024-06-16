@@ -5,6 +5,7 @@ type genderTypeCountProps = {
     maleCount: number
     femaleCount: number
     othersCount: number
+    chartData:[]
 }
 
 const initialState: genderTypeCountProps = {
@@ -12,6 +13,7 @@ const initialState: genderTypeCountProps = {
     maleCount: 0,
     femaleCount: 0,
     othersCount: 0,
+    chartData:[]
 }
 
 export const ChangeSignUpFormSlicer = createSlice({
@@ -46,9 +48,14 @@ export const ChangeSignUpFormSlicer = createSlice({
             state.othersCount = 0;
             state.count = 0;
           },
+
+          setChartData:(state,action)=>{
+            console.log(action.payload)
+            state.chartData = action.payload
+          }
     }
 })
 
-export const { setGenderTypeCount, setCount,resetCounts } = ChangeSignUpFormSlicer.actions;
+export const { setGenderTypeCount, setCount,resetCounts,setChartData } = ChangeSignUpFormSlicer.actions;
 
 export default ChangeSignUpFormSlicer.reducer

@@ -2,28 +2,28 @@ import React, { useEffect } from "react";
 import "./SignUpAdmin.css"
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
-import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck } from "../../../ReduxSlicers/SignUpSlicer";
+import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck, setAdminSignUpSecret } from "../../../ReduxSlicers/SignUpSlicer";
 import { redirect, useNavigate } from "react-router-dom";
 import ChangeSignUpFormButtons from "./ChangeSignUpFormButtons";
 import { v4 as uuidv4 } from 'uuid';
 
 const signUpquery = gql`
-mutation create($userSignUpParameters: createUserSignUpInput!){
-createUserSignUp(userSignUpParameters: $userSignUpParameters) {
-name,
-emailId,
-password
+mutation adminSignUp($adminSignUpParameters: adminSignUpTableInput!){
+  createAdminSignUp(adminSignUpParameters: $adminSignUpParameters) {
+    success
+  }
 }
-}
+
 `
 
 function SignupAdmin() {
 
-  const userName = useAppSelector((state) => state.SignUpSlicer.userName)
-  const userEmailId = useAppSelector((state) => state.SignUpSlicer.userEmailId)
-  const userEmailPassword = useAppSelector((state) => state.SignUpSlicer.userEmailPassword)
-  const userEmailPasswordRecheck = useAppSelector((state) => state.SignUpSlicer.userEmailPasswordRecheck)
-
+  const adminName = useAppSelector((state) => state.SignUpSlicer.userName)
+  const adminEmailId = useAppSelector((state) => state.SignUpSlicer.userEmailId)
+  const adminEmailPassword = useAppSelector((state) => state.SignUpSlicer.userEmailPassword)
+  const adminEmailPasswordRecheck = useAppSelector((state) => state.SignUpSlicer.userEmailPasswordRecheck)
+  const adminSecretKey = useAppSelector((state) => state.SignUpSlicer.userEmailPasswordRecheck)
+  
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate()
@@ -34,11 +34,7 @@ function SignupAdmin() {
     navigate("/")
   }
 
-  const [userSignUp, { loading }] = useMutation(signUpquery);
-  useEffect(() => {
-    const res = userSignUp
-    console.log(res)
-  })
+  const [adminSignUp, { loading }] = useMutation(signUpquery);
 
   return (
     <div>
@@ -54,19 +50,23 @@ function SignupAdmin() {
             <input type="text" placeholder="Admin EmailId" onChange={(e) => dispatch(setUserEmailId(e.target.value))} />
             <input type="password" placeholder="Admin Password" onChange={(e) => dispatch(setEmailPassword(e.target.value))} />
             <input type="password" placeholder="Retype Password" onChange={(e) => dispatch(setEmailPasswordRecheck(e.target.value))} />
-
+            <input type="secret key" placeholder="admin secret provided by company" onChange={(e) => dispatch(setAdminSignUpSecret(e.target.value))} />
+            
             <button type="submit" onClick={() => {
-              userSignUp({
+              adminSignUp({
                 variables: {
-                  userSignUpParameters: {
+                  adminSignUpParameters: {
                     uid:uuidv4(),
-                    name: userName,
-                    emailId: userEmailId,
-                    password: userEmailPassword
+                    name: adminName,
+                    emailId: adminEmailId,
+                    password: adminEmailPassword,
+                    status:false,
+                    adminSecretKey:adminSecretKey
+
                   },
                 },
               })
-            }}>Sign Up</button>
+            }}>Admin Sign Up</button>
             {/* {
               d
             } */}

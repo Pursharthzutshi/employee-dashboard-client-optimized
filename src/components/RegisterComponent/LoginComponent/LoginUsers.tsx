@@ -4,12 +4,13 @@ import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserLoggedInEmailId, setUserLoggedInEmailPassword } from "../../../ReduxSlicers/LoginSlicer";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-import { setLoggedInSavedEmailId } from "../../../ReduxSlicers/LocalStorageSlicer";
 import ChangeLogInFormButtons from "./ChangeLogInFormButtons";
+import { setAdminStatus, setLoggedInSavedUid, setShowLogOutButtonElements } from "../../../ReduxSlicers/LocalStorageSlicer";
 
 const checkUserLoggedInAuthQuery = gql`
 mutation userLogin($userLoginParameters: createLoginInput!){
   createUserLogin(userLoginParameters: $userLoginParameters) {
+  uid
   success
   message
   token
@@ -22,7 +23,7 @@ function LoginUsers() {
     const userLoggedinEmailId = useAppSelector((state) => state.LoginSlicer.userLoggedinEmailId)
     const userLoggedInEmailPassword = useAppSelector((state) => state.LoginSlicer.userLoggedinPassword)
 
-    const dispatch = useAppDispatch()
+    const Dispatch = useAppDispatch()
     // const [] = useState("");
     // const [] = useState()
     const navigate = useNavigate()
@@ -30,43 +31,40 @@ function LoginUsers() {
     const [checkUserLoggedInAuth] = useMutation(checkUserLoggedInAuthQuery, {
         onCompleted: (data) => {
 
-
-            console.log(data)
             if (data.createUserLogin.success === true) {
                 navigate("/")
-                dispatch(setLoggedInSavedEmailId(userLoggedinEmailId));
+                Dispatch(setAdminStatus(false));
+                Dispatch(setShowLogOutButtonElements(true));
+                Dispatch(setLoggedInSavedUid(data.createUserLogin.uid));
             } else {
-                dispatch(setLoggedInSavedEmailId(""));
-                console.log(true);
-
+                Dispatch(setShowLogOutButtonElements(false));
             }
-            // Optionally refetch data here
         },
     });
-  
+
 
 
     const loginForm = (e: any) => {
         e.preventDefault()
-
     }
     //   }
 
     return (
         <div>
-            
-    <ChangeLogInFormButtons/>
+
+            <ChangeLogInFormButtons />
 
             <form onSubmit={loginForm}>
-            <h3>User Login In Form</h3>
+                <h3>User Login In Form</h3>
 
-                <input type="text" placeholder="EmailId" onChange={(e) => dispatch(setUserLoggedInEmailId(e.target.value))} />
-                <input type="password" placeholder="password" onChange={(e) => dispatch(setUserLoggedInEmailPassword(e.target.value))} />
+                <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserLoggedInEmailId(e.target.value))} />
+                <input type="password" placeholder="password" onChange={(e) =>Dispatch(setUserLoggedInEmailPassword(e.target.value))} />
                 <button onClick={() => {
                     {
                         checkUserLoggedInAuth({
                             variables: {
                                 userLoginParameters: {
+
                                     emailId: userLoggedinEmailId,
                                     password: userLoggedInEmailPassword
                                 }

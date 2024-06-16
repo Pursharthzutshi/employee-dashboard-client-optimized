@@ -33,7 +33,7 @@ function EmployeesTaskManagerDialogBoxForm() {
     const Dispatch = useAppDispatch();
 
     const addSelectedUser = (currentUsers: String) => {
-
+        console.log(currentUsers)
 
         if (!selectedUsers.includes(currentUsers)) {
 
@@ -47,15 +47,18 @@ function EmployeesTaskManagerDialogBoxForm() {
         } else {
             Dispatch(setAlreadyAddedEmployeeStatus(true));
         }
+        console.log(selectedUsers)
+
+        // Dispatch(SetEmployeeEmailId(selectedUsers));
 
         // if(currentUsers == usersEmailIds)
         // setSelectedUsers((prevUser:any)=>[...prevUser,currentUsers])
     }
 
-    useEffect(() => {
-        Dispatch(SetEmployeeEmailId(selectedUsers));
+    // useEffect(() => {
+    //     Dispatch(SetEmployeeEmailId(selectedUsers));
 
-    })
+    // })
 
     const removeSelectedUsers = (selectedEmailId: any) => {
         const updatedSelectedUsers = selectedUsers.filter((val: any) => {
@@ -71,9 +74,9 @@ function EmployeesTaskManagerDialogBoxForm() {
         Dispatch(setShowEmployeesEditDialogBox(false));
     }
 
-    useEffect(() => {
-        console.log(selectedUsers)
-    }, [selectedUsers])
+    // useEffect(() => {
+    //     console.log(selectedUsers)
+    // }, [selectedUsers])
 
     if (loading) return <p>Loading...</p>;
 
