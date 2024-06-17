@@ -75,8 +75,7 @@ function App() {
       </Routes>
 
       <Link to="/login">Login</Link>
-      <br></br>
-      <Link to="/signup">signup</Link>
+      {/* <Link to="/signup">signup</Link> */}
 
     </div>
   );

@@ -58,7 +58,7 @@ function SignupUsers() {
 
   return (
     <div>
-      <ChangeSignUpFormButtons />
+      {/* <ChangeSignUpFormButtons /> */}
 
       <div className="signup-container">
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./LeftSidebar.css"
-import { FaAddressBook, FaBeer, FaChevronCircleUp, FaHome, FaPersonBooth, FaProductHunt, FaUserPlus } from "react-icons/fa";
+import { FaAddressBook, FaBeer, FaChevronCircleUp, FaCogs, FaHome, FaPersonBooth, FaProductHunt, FaSignInAlt, FaSignOutAlt, FaUserPlus } from "react-icons/fa";
 import { Route, Link } from "react-router-dom";
 import { setShowLogOutButtonElements, setLogOutStatus, setAdminStatus } from "../../ReduxSlicers/LocalStorageSlicer";
 import { useAppDispatch, useAppSelector } from "../../ReduxHooks";
@@ -16,20 +16,11 @@ function LeftSidebar() {
         Dispatch(setShowLogOutButtonElements(false))
         Dispatch(setLogOutStatus(false))
         Dispatch(setAdminStatus(false))
-
-
     }
 
-    useEffect(() => {
-        // console.log(showLogOutButtonElements)
-    })
     return (
         <div className="left-sidebar">
-            {
-                showLogOutButtonElements &&
 
-                <FaChevronCircleUp onClick={logout} />
-            }
             <div className="left-sidebar-icons-div">
 
                 <Link className="left-sidebar-links" to="/">
@@ -47,11 +38,21 @@ function LeftSidebar() {
                 <Link className="left-sidebar-links" to="/signup">
                     <FaUserPlus className="left-sidebar-icons" />
                 </Link>
+                <Link className="left-sidebar-links" to="/signup">
+                    <FaCogs className="left-sidebar-icons" />
+                </Link>
+                {
+                    showLogOutButtonElements ?
+
+                        <FaSignOutAlt onClick={logout} /> :
+                        <Link to="/login">
+                            <FaSignInAlt to="/login" />
+                        </Link>
+                }
 
                 <div>
-                    <Link className="left-sidebar-links" to="/">
-                        <FaHome className="left-sidebar-icons" />
-                    </Link>
+                    <div>
+                    </div>
                 </div>
             </div>
         </div>
