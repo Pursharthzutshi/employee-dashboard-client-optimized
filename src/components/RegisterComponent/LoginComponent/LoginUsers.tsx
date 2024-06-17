@@ -58,7 +58,7 @@ function LoginUsers() {
                 <h3>User Login In Form</h3>
 
                 <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserLoggedInEmailId(e.target.value))} />
-                <input type="password" placeholder="password" onChange={(e) =>Dispatch(setUserLoggedInEmailPassword(e.target.value))} />
+                <input type="password" placeholder="password" onChange={(e) => Dispatch(setUserLoggedInEmailPassword(e.target.value))} />
                 <button onClick={() => {
                     {
                         checkUserLoggedInAuth({

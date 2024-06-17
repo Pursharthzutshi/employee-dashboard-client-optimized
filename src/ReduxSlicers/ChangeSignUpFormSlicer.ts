@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     changeSignUpForm: true,
-    changeLoginForm:true
+    changeLoginForm: true
 }
 
 export const ChangeSignUpFormSlicer = createSlice({
@@ -18,6 +18,6 @@ export const ChangeSignUpFormSlicer = createSlice({
     }
 })
 
-export const { setChangeSignUpForm,setChangeLoginForm } = ChangeSignUpFormSlicer.actions;
+export const { setChangeSignUpForm, setChangeLoginForm } = ChangeSignUpFormSlicer.actions;
 
 export default ChangeSignUpFormSlicer.reducer

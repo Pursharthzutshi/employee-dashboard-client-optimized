@@ -42,7 +42,7 @@ function App() {
 
   useEffect(() => {
     console.log('adminStatus from localStorage:', localStorage.getItem('adminStatus'));
-//  console.log(JSON.parse(adminStatus))
+    //  console.log(JSON.parse(adminStatus))
   }, [adminStatus])
 
   return (
@@ -70,9 +70,7 @@ function App() {
           changeLoginForm ? <LoginUsers /> : <LoginAdmin />}
         />
 
-        <Route path="/signup" element={
-          changeSignUpForm ? <SignupUsers /> : <SignupAdmin />
-        } />
+        <Route path="/signup" element={<SignupUsers />} />
 
       </Routes>
 

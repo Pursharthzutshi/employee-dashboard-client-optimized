@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 type localStorageSlicerProps = {
-    SearchFilter:String
+    SearchFilter: String
 }
 
-const initialState:localStorageSlicerProps = {
+const initialState: localStorageSlicerProps = {
     SearchFilter: "",
 }
 
@@ -16,7 +16,7 @@ export const SearchFilterSilcer = createSlice({
             console.log(action.payload)
             state.SearchFilter = action.payload;
         },
-   
+
     }
 })
 

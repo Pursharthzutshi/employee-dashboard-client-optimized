@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     addToDoList: "",
-    
+
 }
 
 export const ToDoSlicer = createSlice({

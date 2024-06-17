@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./SignUpAdmin.css"
+import "./SignupUsers.css"
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck, setAdminSignUpSecret } from "../../../ReduxSlicers/SignUpSlicer";
@@ -23,7 +23,7 @@ function SignupAdmin() {
   const adminEmailPassword = useAppSelector((state) => state.SignUpSlicer.userEmailPassword)
   const adminEmailPasswordRecheck = useAppSelector((state) => state.SignUpSlicer.userEmailPasswordRecheck)
   const adminSecretKey = useAppSelector((state) => state.SignUpSlicer.userEmailPasswordRecheck)
-  
+
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate()
@@ -38,7 +38,7 @@ function SignupAdmin() {
 
   return (
     <div>
-      <ChangeSignUpFormButtons/>
+      {/* <ChangeSignUpFormButtons/> */}
       <div className="signup-container">
 
         <div className="signup-box">
@@ -51,17 +51,17 @@ function SignupAdmin() {
             <input type="password" placeholder="Admin Password" onChange={(e) => dispatch(setEmailPassword(e.target.value))} />
             <input type="password" placeholder="Retype Password" onChange={(e) => dispatch(setEmailPasswordRecheck(e.target.value))} />
             <input type="secret key" placeholder="admin secret provided by company" onChange={(e) => dispatch(setAdminSignUpSecret(e.target.value))} />
-            
+
             <button type="submit" onClick={() => {
               adminSignUp({
                 variables: {
                   adminSignUpParameters: {
-                    uid:uuidv4(),
+                    uid: uuidv4(),
                     name: adminName,
                     emailId: adminEmailId,
                     password: adminEmailPassword,
-                    status:false,
-                    adminSecretKey:adminSecretKey
+                    status: false,
+                    adminSecretKey: adminSecretKey
 
                   },
                 },

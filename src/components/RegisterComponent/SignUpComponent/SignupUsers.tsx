@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import "./SignupUsers.css"
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
-import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck, setGenderType } from "../../../ReduxSlicers/SignUpSlicer";
+import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck, setGenderType, setDepartment } from "../../../ReduxSlicers/SignUpSlicer";
 import { redirect, useNavigate } from "react-router-dom";
 import ChangeSignUpFormButtons from "./ChangeSignUpFormButtons";
 import { v4 as uuidv4 } from 'uuid';
 import { setSignUpResponseStatus } from "../../../ReduxSlicers/SignUpResponseSlicer";
+import { SetEmployeeEmailId } from "../../../ReduxSlicers/AddEmployeesTaskSlicer";
 
 const signUpquery = gql`
 mutation create($userSignUpParameters: createUserSignUpInput!){
@@ -24,8 +25,9 @@ function SignupUsers() {
   const userEmailPassword = useAppSelector((state) => state.SignUpSlicer.userEmailPassword)
   const userEmailPasswordRecheck = useAppSelector((state) => state.SignUpSlicer.userEmailPasswordRecheck)
   const genderType = useAppSelector((state) => state.SignUpSlicer.genderType)
+  const department = useAppSelector((state) => state.SignUpSlicer.department)
 
-  const dispatch = useAppDispatch();
+  const Dispatch = useAppDispatch();
 
   const navigate = useNavigate()
 
@@ -39,20 +41,20 @@ function SignupUsers() {
 
   })
 
-  const signUpResponseStatus = useAppSelector((state)=>state.SignUpResponseSlicer.signUpResponseStatus);
+  const signUpResponseStatus = useAppSelector((state) => state.SignUpResponseSlicer.signUpResponseStatus);
 
-  const [userSignUp, { data: signUpResponseData, loading }] = useMutation(signUpquery,{
+  const [userSignUp, { data: signUpResponseData, loading }] = useMutation(signUpquery, {
 
-    onCompleted:(data)=>{
+    onCompleted: (data) => {
       console.log(data.createUserSignUp.success)
       if (data.createUserSignUp.success === true) {
-        dispatch(setSignUpResponseStatus(true))
+        Dispatch(setSignUpResponseStatus(true))
       }
     }
   });
   useEffect(() => {
     console.log(signUpResponseStatus)
-  },[])
+  }, [])
 
   return (
     <div>
@@ -61,23 +63,34 @@ function SignupUsers() {
       <div className="signup-container">
 
         <div className="signup-box">
-          <h3>Sign Up Users</h3>
+          <h3>Create Employees Account</h3>
 
           <form onSubmit={signUpForm} className="signup-form">
 
-            <input type="text" placeholder="Name" onChange={(e) => dispatch(setUserName(e.target.value))} />
-            <input type="text" placeholder="EmailId" onChange={(e) => dispatch(setUserEmailId(e.target.value))} />
-            <input type="password" placeholder="Password" onChange={(e) => dispatch(setEmailPassword(e.target.value))} />
-            <input type="category" placeholder="Retype Password" onChange={(e) => dispatch(setEmailPasswordRecheck(e.target.value))} />
+            <input type="text" placeholder="Name" onChange={(e) => Dispatch(setUserName(e.target.value))} />
+            <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserEmailId(e.target.value))} />
+            <input type="password" placeholder="Password" onChange={(e) => Dispatch(setEmailPassword(e.target.value))} />
+            <input type="category" placeholder="Retype Password" onChange={(e) => Dispatch(setEmailPasswordRecheck(e.target.value))} />
 
             <div className="gender-cateogry-div">
-              <input onChange={(e) => dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="male" type="radio" />
+              <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="male" type="radio" />
               <label>Male</label>
-              <input onChange={(e) => dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="female" type="radio" />
+              <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="female" type="radio" />
               <label>Female</label>
-              <input onChange={(e) => dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="others" type="radio" />
+              <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="others" type="radio" />
               <label>Others</label>
             </div>
+
+            <br></br>
+
+            <select onChange={(e) => Dispatch(setDepartment(e.target.value))}>
+              <option>HR Department</option>
+              <option>Software Department</option>
+              <option>Testing Department</option>
+              <option>UI/UX Design Department</option>
+              <option>Sales Department</option>
+            </select>
+
             <button type="submit" onClick={() => {
               userSignUp({
                 variables: {
@@ -87,7 +100,8 @@ function SignupUsers() {
                     emailId: userEmailId,
                     password: userEmailPassword,
                     genderType: genderType,
-                    status:false
+                    status: false,
+                    department: department
                   },
                 },
               })
@@ -96,6 +110,7 @@ function SignupUsers() {
             {/* {
               d
             } */}
+
           </form>
         </div>
 

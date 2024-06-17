@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 type genderTypeCountProps = {
     checkInStatus: boolean
- 
+
 }
 
 const initialState: genderTypeCountProps = {
@@ -14,9 +14,9 @@ export const CheckInStatusSlicer = createSlice({
     initialState,
     reducers: {
         setChechInStatus: (state, action) => {
-          state.checkInStatus = action.payload
+            state.checkInStatus = action.payload
         },
-    
+
     }
 })
 

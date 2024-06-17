@@ -1,24 +1,26 @@
-.signup-container,.signup-form,.signup-box{
+.signup-container,
+.signup-form,
+.signup-box {
     display: flex;
-    
+
 }
 
-.signup-box{
+.signup-box {
     flex-direction: column;
 }
 
-.signup-form{
+.signup-form {
     flex-direction: column;
 }
 
-.signup-container{
+.signup-container {
     width: 100%;
     height: 100vh;
     justify-content: center;
     align-items: center;
 }
 
-.signup-box{
+.signup-box {
     width: 30%;
     /* height: 35%; */
     justify-content: space-around;
@@ -26,30 +28,30 @@
     box-shadow: .2px .2px 12px .2px whitesmoke;
 }
 
-.gender-cateogry-div{
+.gender-cateogry-div {
     margin-top: 20px;
 }
 
-.gender-type{
-    margin-left:10px ;
+.gender-type {
+    margin-left: 10px;
     background-color: none;
     box-shadow: none;
 }
 
-.signup-box input{
+.signup-box input {
     outline: none;
     padding: 4px 2px 4px 12px;
     border: none;
     box-shadow: .2px .2px 2px .2px lightgray;
     margin-top: 10px;
-        /* font-family: "Montserrat";  */
+    /* font-family: "Montserrat";  */
 }
 
 
-.signup-box button{
+.signup-box button {
 
     width: 10rem;
-    margin-top:30px;
+    margin-top: 30px;
 }
 
 /* .signup-box input:hover{

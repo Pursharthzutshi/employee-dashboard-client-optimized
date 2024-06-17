@@ -51,7 +51,7 @@ function LoginAdmin() {
         e.preventDefault()
 
     }
-   
+
     return (
         <div>
             <ChangeLogInFormButtons />

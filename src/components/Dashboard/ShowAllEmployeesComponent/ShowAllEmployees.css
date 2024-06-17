@@ -1,8 +1,8 @@
-.show-all-employees-component{
+.show-all-employees-component {
     box-shadow: .2px .2px 22px .2px rgb(232, 232, 232);
     /* height: 100vh; */
     min-height: 93vh;
-    padding:2px 2px 32px 12px;
+    padding: 2px 2px 32px 12px;
 }
 
 .employees-details-container {
@@ -13,13 +13,14 @@
     flex-direction: row;
     align-items: center;
 }
-.employees-details-container{
+
+.employees-details-container {
     flex-wrap: wrap;
     margin-top: 20px;
 
 }
 
-.search-employees-input{
+.search-employees-input {
 
     width: 50%;
     margin-left: 10px;
@@ -30,6 +31,7 @@
     font-family: "Montserrat";
 
 }
+
 .employees-details-div {
     display: flex;
     flex-direction: column;

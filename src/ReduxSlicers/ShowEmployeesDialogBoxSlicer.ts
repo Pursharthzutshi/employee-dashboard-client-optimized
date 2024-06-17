@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit"
 
 type ShowEmployeesDialogBoxSlicerProps = {
     showEmployeesDialogBox: boolean
-    showEmployeesEditDialogBox:boolean
+    showEmployeesEditDialogBox: boolean
 }
 
 const initialState: ShowEmployeesDialogBoxSlicerProps = {
     showEmployeesDialogBox: false,
-    showEmployeesEditDialogBox:false
+    showEmployeesEditDialogBox: false
 }
 
 export const ShowEmployeesDialogBoxSlicer = createSlice({
@@ -25,6 +25,6 @@ export const ShowEmployeesDialogBoxSlicer = createSlice({
     }
 })
 
-export const { setShowEmployeesDialogBox,setShowEmployeesEditDialogBox } = ShowEmployeesDialogBoxSlicer.actions;
+export const { setShowEmployeesDialogBox, setShowEmployeesEditDialogBox } = ShowEmployeesDialogBoxSlicer.actions;
 
 export default ShowEmployeesDialogBoxSlicer.reducer

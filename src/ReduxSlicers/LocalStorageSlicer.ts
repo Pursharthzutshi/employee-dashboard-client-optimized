@@ -11,7 +11,7 @@ type localStorageSlicerProps = {
 }
 
 const initialState: localStorageSlicerProps = {
-    adminStatus: JSON.parse(localStorage.getItem("adminStatus") || "false") ,
+    adminStatus: JSON.parse(localStorage.getItem("adminStatus") || "false"),
     loggedInSavedUid: localStorage.getItem("loggedInSavedUid"),
     logOutStatus: localStorage.getItem("logOutButton"),
     showLogOutButtonElements: localStorage.getItem("logOutButton"),
@@ -35,9 +35,9 @@ export const LocalStorageSlicer = createSlice({
 
             const savedAdminStatus = JSON.parse(localStorage.getItem("adminStatus") || "false")
             console.log(savedAdminStatus)
-            
+
             // if (savedAdminStatus) {
-                localStorage.setItem(savedAdminStatus ? "adminLoggedInSavedUid" : "loggedInSavedUid", action.payload);
+            localStorage.setItem(savedAdminStatus ? "adminLoggedInSavedUid" : "loggedInSavedUid", action.payload);
             // }
         },
 

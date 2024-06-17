@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react"
-import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../../../ReduxHooks";
 import { Bar, Line } from "react-chartjs-2";
 
 export type chartDataProps = {
@@ -14,7 +14,7 @@ export type datasetsProps = {
   backgroundColor?: string[],
   borderWidth: number
 }
-function DataFile() {
+function GenderTypeChart() {
 
 
   const maleCount = useAppSelector((state) => state.ChartsDetailsSlicer.maleCount)
@@ -39,14 +39,14 @@ function DataFile() {
   }
 
   const options = {
-    
+
     scales: {
       x: {
         display: false
       },
       y: {
-          display: false
-     
+        display: false
+
       },
       // x: {
       //   grid: {
@@ -74,4 +74,4 @@ function DataFile() {
 
 }
 
-export default DataFile;
+export default GenderTypeChart;

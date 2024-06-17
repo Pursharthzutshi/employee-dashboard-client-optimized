@@ -52,7 +52,7 @@ function EmployeeStatus() {
             </tr>
           ))} */}
 
-                    {showAllUsersDetailsAndStatus?.fetchEmailUsersIds.filter((val:any) => {
+                    {showAllUsersDetailsAndStatus?.fetchEmailUsersIds.filter((val: any) => {
                         return val
                     }).map((val: any) => (
                         <tr key={val.uid} className="employee-table-content-div">

@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-type taskAssignedProps={
-    taskAssigned:boolean
+type taskAssignedProps = {
+    taskAssigned: boolean
 }
 
-const initialState:taskAssignedProps = {
-    taskAssigned:false
+const initialState: taskAssignedProps = {
+    taskAssigned: false
 }
 
 const ShowTaskAssignEmployeeInDialogBoxSlicer = createSlice({
-    name:"ShowTaskAssignEmployeeInDialogBoxSlicer",
+    name: "ShowTaskAssignEmployeeInDialogBoxSlicer",
     initialState,
-    reducers:{
-        setTaskAssign:(state,action)=>{
+    reducers: {
+        setTaskAssign: (state, action) => {
             state.taskAssigned = action.payload;
         }
     }

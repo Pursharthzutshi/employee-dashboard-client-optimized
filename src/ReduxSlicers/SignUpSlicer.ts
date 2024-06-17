@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
+
     userName: "",
     userEmailId: "",
     userEmailPassword: "",
     userEmailPasswordRecheck: "",
-    genderType:"",
-    adminSignUpSecret:""
+    genderType: "",
+    adminSignUpSecret: "",
+    department: ""
 }
 
 export const SignUpSlicer = createSlice({
@@ -27,16 +29,20 @@ export const SignUpSlicer = createSlice({
             state.userEmailPasswordRecheck = action.payload;
         },
 
-        setGenderType:(state,action)=>{
+        setGenderType: (state, action) => {
             console.log(action.payload)
             state.genderType = action.payload;
         },
-        setAdminSignUpSecret:(state,action)=>{
+        setAdminSignUpSecret: (state, action) => {
             console.log(action.payload);
+        },
+        setDepartment: (state, action) => {
+            console.log(action.payload)
+            state.department = action.payload;
         }
 
     }
 })
-export const { setUserName, setUserEmailId, setEmailPassword,setEmailPasswordRecheck,setGenderType,setAdminSignUpSecret } = SignUpSlicer.actions;
+export const { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck, setGenderType, setAdminSignUpSecret, setDepartment } = SignUpSlicer.actions;
 
 export default SignUpSlicer.reducer

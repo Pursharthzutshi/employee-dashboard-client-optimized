@@ -1,12 +1,11 @@
-
 /* .box:hover li{
     visibility: visible;
 } */
 
 /* Dashboard code */
-.dashboard{
+.dashboard {
 
-    padding:2px 12px 2px 12px;
+    padding: 2px 12px 2px 12px;
     margin-top: 10px;
     width: 98%;
     height: 100%;
@@ -15,21 +14,21 @@
     /* box-shadow: .2px .2px 22px .2px rgb(232, 232, 232); */
 }
 
-h3{
+h3 {
     margin-top: 40px;
     margin-left: 20px;
 }
 
 
 
-.bar-chart-div{
+.bar-chart-div {
     margin-left: 20px;
     margin-top: 40px;
     width: 33%;
     height: 20rem;
 }
 
-.doughnut-chart{
+.doughnut-chart {
 
     background: transparent;
     /* width: 10%; */
@@ -38,12 +37,12 @@ h3{
 }
 
 
-.chart-div-container{
+.chart-div-container {
     display: flex;
-    gap:40px;
+    gap: 40px;
 }
 
-.todo-list{
+.todo-list {
     box-shadow: .2px .2px 2px .2px lightgray;
     height: 40vh;
     width: 50%;

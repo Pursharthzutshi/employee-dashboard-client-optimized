@@ -16,18 +16,18 @@ import SearchFilterSilcer from "../ReduxSlicers/SearchFilterSilcer";
 
 export const store = configureStore({
   reducer: {
-    SignUpSlicer:SignUpSlicer,
-    LoginSlicer:LoginSlicer,
-    AddEmployeesTaskSlicer:AddEmployeesTaskSlicer,
-    ShowEmployeesDialogBoxSlicer:ShowEmployeesDialogBoxSlicer,
-    LocalStorageSlicer:LocalStorageSlicer,
-    ChangeSignUpFormSlicer:ChangeSignUpFormSlicer,
-    ChangeComponentsState:ChangeComponentsState,
-    ShowTaskAssignEmployeeInDialogBoxSlicer:ShowTaskAssignEmployeeInDialogBoxSlicer,
-    ChartsDetailsSlicer:ChartsDetailsSlicer,
-    SignUpResponseSlicer:SignUpResponseSlicer,
-    CheckInStatusSlicer:CheckInStatusSlicer,
-    SearchFilterSilcer:SearchFilterSilcer
+    SignUpSlicer: SignUpSlicer,
+    LoginSlicer: LoginSlicer,
+    AddEmployeesTaskSlicer: AddEmployeesTaskSlicer,
+    ShowEmployeesDialogBoxSlicer: ShowEmployeesDialogBoxSlicer,
+    LocalStorageSlicer: LocalStorageSlicer,
+    ChangeSignUpFormSlicer: ChangeSignUpFormSlicer,
+    ChangeComponentsState: ChangeComponentsState,
+    ShowTaskAssignEmployeeInDialogBoxSlicer: ShowTaskAssignEmployeeInDialogBoxSlicer,
+    ChartsDetailsSlicer: ChartsDetailsSlicer,
+    SignUpResponseSlicer: SignUpResponseSlicer,
+    CheckInStatusSlicer: CheckInStatusSlicer,
+    SearchFilterSilcer: SearchFilterSilcer
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 
   },
