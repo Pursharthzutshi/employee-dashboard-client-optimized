@@ -15,7 +15,7 @@ import LoginAdmin from './components/RegisterComponent/LoginComponent/LoginAdmin
 import AssignedEmployeesTask from './components/Dashboard/UserComponents/AssignedEmployeesTask';
 import { setChangeComponent } from './ReduxSlicers/ChangeComponentsState';
 import EmployeesHome from './components/Dashboard/UserComponents/EmployeesHome';
-import { setLogOutStatus } from './ReduxSlicers/LocalStorageSlicer';
+import { setAdminStatus, setLogOutStatus } from './ReduxSlicers/LocalStorageSlicer';
 
 
 function App() {
@@ -35,25 +35,16 @@ function App() {
 
   // const [showLogOutStatus,setShowLogoutStatus] = useState(false);
 
+  const adminStatus = useAppSelector((state) => state.LocalStorageSlicer.adminStatus)
 
-  const [showLoggedInType, setShowLoggedInType] = useState<Boolean>(false);
+
+  // const [test] = useState<boolean>(false)
 
   useEffect(() => {
-    const adminLoggedInSavedUid = localStorage.getItem("adminLoggedInSavedUid")
-    if (adminLoggedInSavedUid) {
-      setShowLoggedInType(true)
-    }else{
-      setShowLoggedInType(false)
+    console.log('adminStatus from localStorage:', localStorage.getItem('adminStatus'));
+//  console.log(JSON.parse(adminStatus))
+  }, [adminStatus])
 
-    }
-    // const employeeLoggedInSavedUid = localStorage.getItem("loggedInSavedUid")
-
-    // if (employeeLoggedInSavedUid) {
-    //   setShowLoggedInType(false)
-    // }
-    console.log(adminLoggedInSavedUid)
-    
-  },[])
   return (
     <div className="App">
 
@@ -63,12 +54,12 @@ function App() {
       <Routes>
         <Route path="/" element=
           {
-            showLoggedInType ? <Home /> : <EmployeesHome />
+            adminStatus ? <Home /> : <EmployeesHome />
           }
         />
         <Route path="/employeesTaskManagmentPage" element={
 
-          showLoggedInType ? <EmployeesTaskManager /> : <AssignedEmployeesTask />
+          adminStatus ? <EmployeesTaskManager /> : <AssignedEmployeesTask />
         }
         />
 

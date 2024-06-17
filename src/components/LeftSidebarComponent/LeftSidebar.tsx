@@ -16,11 +16,12 @@ function LeftSidebar() {
         Dispatch(setShowLogOutButtonElements(false))
         Dispatch(setLogOutStatus(false))
         Dispatch(setAdminStatus(false))
+        
 
     }
 
     useEffect(()=>{
-        console.log(showLogOutButtonElements)
+        // console.log(showLogOutButtonElements)
     })
     return (
         <div className="left-sidebar">

@@ -25,7 +25,7 @@ function LoginAdmin() {
     const userLoggedinEmailId = useAppSelector((state) => state.LoginSlicer.userLoggedinEmailId)
     const userLoggedInEmailPassword = useAppSelector((state) => state.LoginSlicer.userLoggedinPassword)
 
-    
+
     const Dispatch = useAppDispatch()
     // const [] = useState("");
     // const [] = useState()
@@ -34,11 +34,9 @@ function LoginAdmin() {
     const [checkAdminLoggedInAuth] = useMutation(checkUserLoggedInAuthQuery, {
         onCompleted: (data) => {
 
-            if (data.createAdminLogin.success === true) {
-                if(data.createAdminLogin.admin === true){
-                    Dispatch(setAdminStatus(true))
-                }
-                console.log(false);
+            console.log(data)
+            if (data.createAdminLogin.admin === true) {
+                Dispatch(setAdminStatus(true))
                 navigate("/")
                 Dispatch(setShowLogOutButtonElements(true));
                 Dispatch(setLoggedInSavedUid(data.createAdminLogin.uid));
@@ -49,18 +47,14 @@ function LoginAdmin() {
     });
 
 
-useEffect(()=>{
-    console.log(checkAdminLoggedInAuth)
-})
     const loginForm = (e: any) => {
         e.preventDefault()
 
     }
-    //   }
-
+   
     return (
         <div>
-            <ChangeLogInFormButtons/>
+            <ChangeLogInFormButtons />
             <form onSubmit={loginForm}>
                 <h3>Admin Login In Form</h3>
                 <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserLoggedInEmailId(e.target.value))} />

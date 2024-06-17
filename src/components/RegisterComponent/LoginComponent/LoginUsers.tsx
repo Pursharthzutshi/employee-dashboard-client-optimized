@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import "./LoginUsers.css"
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserLoggedInEmailId, setUserLoggedInEmailPassword } from "../../../ReduxSlicers/LoginSlicer";
@@ -32,6 +31,7 @@ function LoginUsers() {
         onCompleted: (data) => {
 
             if (data.createUserLogin.success === true) {
+                console.log(data)
                 navigate("/")
                 Dispatch(setAdminStatus(false));
                 Dispatch(setShowLogOutButtonElements(true));

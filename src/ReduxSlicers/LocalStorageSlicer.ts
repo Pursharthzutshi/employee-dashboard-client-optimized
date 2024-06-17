@@ -2,18 +2,20 @@ import { createSlice } from "@reduxjs/toolkit"
 
 type localStorageSlicerProps = {
     // loggedInSavedUid: any
-    adminStatus:any,
-    loggedInSavedUid: any
-    logOutStatus: any,
-    showLogOutButtonElements: any
+    adminStatus: string | null
+    loggedInSavedUid: String | null
+    logOutStatus: String | null
+    showLogOutButtonElements: String | null
+    showLoggedInComponents: String | null
 
 }
 
 const initialState: localStorageSlicerProps = {
-    adminStatus:false,
+    adminStatus: JSON.parse(localStorage.getItem("adminStatus") || "false") ,
     loggedInSavedUid: localStorage.getItem("loggedInSavedUid"),
     logOutStatus: localStorage.getItem("logOutButton"),
     showLogOutButtonElements: localStorage.getItem("logOutButton"),
+    showLoggedInComponents: localStorage.getItem("showLoggedInComponents")
 
 }
 
@@ -22,14 +24,21 @@ export const LocalStorageSlicer = createSlice({
     initialState,
     reducers: {
 
-        setAdminStatus:(state,action)=>{
+        setAdminStatus: (state, action) => {
+            // console.log(action.payload)
             state.adminStatus = action.payload
+            localStorage.setItem("adminStatus", action.payload);
         },
         setLoggedInSavedUid: (state, action) => {
-            console.log(state.adminStatus)
+            // console.log(action.payload)
             state.loggedInSavedUid = action.payload;
-            // state.adminStatus = true
-            localStorage.setItem(state.adminStatus ? "adminLoggedInSavedUid":"loggedInSavedUid", action.payload);
+
+            const savedAdminStatus = JSON.parse(localStorage.getItem("adminStatus") || "false")
+            console.log(savedAdminStatus)
+            
+            // if (savedAdminStatus) {
+                localStorage.setItem(savedAdminStatus ? "adminLoggedInSavedUid" : "loggedInSavedUid", action.payload);
+            // }
         },
 
         setShowLogOutButtonElements: (state, action) => {
@@ -38,18 +47,28 @@ export const LocalStorageSlicer = createSlice({
         },
 
         setLogOutStatus: (state, action) => {
-            if(state.adminStatus === true){
+            // console.log(action.payload)
+            // console.log(state.adminStatus)
+
+            if (localStorage.getItem("adminLoggedInSavedUid")) {
                 localStorage.removeItem("adminLoggedInSavedUid");
-            }else{
+            } else {
                 localStorage.removeItem("loggedInSavedUid");
             }
             localStorage.removeItem("logOutButton")
+            localStorage.removeItem("showLoggedInComponents");
+            localStorage.removeItem("adminStatus");
+
             state.logOutStatus = action.payload
 
-        }
+        },
+        // setShowLoggedInComponents: (state, action) => {
+        //     state.showLoggedInComponents = action.payload
+        //     localStorage.setItem("showLoggedInComponents", action.payload);
+        // }
     }
 })
 
-export const { setLoggedInSavedUid, setShowLogOutButtonElements, setLogOutStatus,setAdminStatus } = LocalStorageSlicer.actions;
+export const { setLoggedInSavedUid, setShowLogOutButtonElements, setLogOutStatus, setAdminStatus } = LocalStorageSlicer.actions;
 
 export default LocalStorageSlicer.reducer
