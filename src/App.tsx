@@ -20,29 +20,15 @@ import { setAdminStatus, setLogOutStatus } from './ReduxSlicers/LocalStorageSlic
 
 function App() {
 
-  // const [sho, setShowSignUpCategory] = useState(true);
 
-
-  const changeSignUpForm = useAppSelector((state) => state.ChangeSignUpFormSlicer.changeSignUpForm)
   const changeLoginForm = useAppSelector((state) => state.ChangeSignUpFormSlicer.changeLoginForm)
-
-  const ChangeComponentsState = useAppSelector((state) => state.ChangeComponentsState.changeComponent);
-
-
-  const logOutStatus = useAppSelector((state) => state.LocalStorageSlicer.logOutStatus)
-
-  const Dispatch = useAppDispatch();
-
-  // const [showLogOutStatus,setShowLogoutStatus] = useState(false);
 
   const adminStatus = useAppSelector((state) => state.LocalStorageSlicer.adminStatus)
 
 
-  // const [test] = useState<boolean>(false)
 
   useEffect(() => {
     console.log('adminStatus from localStorage:', localStorage.getItem('adminStatus'));
-    //  console.log(JSON.parse(adminStatus))
   }, [adminStatus])
 
   return (
@@ -65,7 +51,6 @@ function App() {
 
         <Route path="/showAllEmployeesData" element={<ShowAllEmployees />} />
 
-        {/* //Login Sign up */}
         <Route path="/login" element={
           changeLoginForm ? <LoginUsers /> : <LoginAdmin />}
         />
@@ -74,8 +59,7 @@ function App() {
 
       </Routes>
 
-      <Link to="/login">Login</Link>
-      {/* <Link to="/signup">signup</Link> */}
+
 
     </div>
   );

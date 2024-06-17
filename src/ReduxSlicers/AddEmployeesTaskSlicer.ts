@@ -22,11 +22,10 @@ export const AddEmployeesTaskSlicer = createSlice({
     initialState,
     reducers: {
         setEmployeeName: (state, action) => {
+            console.log(action.payload)
             state.employeeName = action.payload;
         },
         SetEmployeeEmailId: (state, action) => {
-            console.log(action.payload)
-
             state.employeeEmailId = action.payload;
         },
         setEmployeeTaskDesc: (state, action) => {

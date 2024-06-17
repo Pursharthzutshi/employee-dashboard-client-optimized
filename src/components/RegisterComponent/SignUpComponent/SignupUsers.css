@@ -1,12 +1,36 @@
+
+
 .signup-container,
 .signup-form,
-.signup-box {
+.signup-box,.inputs-labels-container,.labels-div,.inputs-div,.gender-cateogry-div {
     display: flex;
 
 }
 
-.signup-box {
+.employee-account-heading{
+    text-align: center;
+    margin-left: -1px;
+}
+
+.signup-container{
+    /* gap:820px; */
+}
+
+.signup-box,.inputs-labels-container,.labels-div,.inputs-div {
     flex-direction: column;
+}
+
+.labels-div,.inputs-div {
+    justify-content: space-between;
+}
+
+.labels-div{
+    gap:20px;
+}
+
+.inputs-div{
+    width: 100%;
+    gap:15px;
 }
 
 .signup-form {
@@ -16,20 +40,26 @@
 .signup-container {
     width: 100%;
     height: 100vh;
+    /* gap:0px; */
     justify-content: center;
-    align-items: center;
 }
 
 .signup-box {
-    width: 30%;
+    margin-top: -10px;
+    align-items: center;
+    width: 100%;
     /* height: 35%; */
-    justify-content: space-around;
-    padding: 12px 12px 12px 12px;
-    box-shadow: .2px .2px 12px .2px whitesmoke;
+    padding: 2px 12px 12px 12px;
+    box-shadow: .2px .2px 6px .2px whitesmoke;
 }
 
 .gender-cateogry-div {
     margin-top: 20px;
+    gap:5px;
+    /* align-items: center; */
+}
+.gender-cateogry-div input{
+    margin-top: -10px;
 }
 
 .gender-type {
@@ -37,8 +67,19 @@
     background-color: none;
     box-shadow: none;
 }
+.inputs-labels-container{
+    
+    gap:180px;
+    /* justify-content: space-eve; */
+}
+.signup-box input{
+    width: 100%;
 
-.signup-box input {
+    margin-top: 40px;
+}
+
+.signup-box input,.login-box input {
+    /* width: 100%; */
     outline: none;
     padding: 4px 2px 4px 12px;
     border: none;
@@ -49,11 +90,33 @@
 
 
 .signup-box button {
-
-    width: 10rem;
-    margin-top: 30px;
+    background: linear-gradient(to left,rgb(52, 195, 252),rgb(78, 184, 255));
+    font-family: "Montserrat";
+    background-color: none;
+    border: none;
+    width: 100%;
+    color:rgb(255, 255, 255);
+    border-radius: 4px;
+    padding: 6px 2px 7px 2px;
+    margin-top: 50px;
 }
 
 /* .signup-box input:hover{
   
 } */
+
+.select-department{
+    border: none;
+    font-family: "Montserrat";
+    padding:4px 3px 4px 4px;
+    box-shadow:.2px .2px 12px .2px whitesmoke;
+}
+
+.sign-up-right-side-image{
+    margin-top: -10px;
+    background: linear-gradient(to left,rgba(137, 231, 255, 0.815),rgba(76, 213, 255, 0.692)),url("../images/add-user.png");
+    height: 100%;
+    width: 30%;
+    background-repeat: none;
+    background-size: cover;
+}

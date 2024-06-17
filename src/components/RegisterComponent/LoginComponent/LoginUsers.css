@@ -5,3 +5,25 @@
 p{
     margin-top: 10px;
 }
+
+.login-form{
+    display: flex;
+}
+
+.login-form{
+    flex-direction: column;
+}
+
+.login-form{
+    align-items: center;
+    gap:20px;
+}
+
+.login-form input {
+    outline: none;
+    padding: 4px 2px 4px 12px;
+    border: none;
+    box-shadow: .2px .2px 2px .2px lightgray;
+    margin-top: 10px;
+    /* font-family: "Montserrat";  */
+}

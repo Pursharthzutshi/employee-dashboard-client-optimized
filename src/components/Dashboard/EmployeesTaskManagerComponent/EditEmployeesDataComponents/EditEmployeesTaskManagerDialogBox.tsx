@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../../ReduxHooks";
 import { setShowEmployeesDialogBox, setShowEmployeesEditDialogBox } from "../../../../ReduxSlicers/ShowEmployeesDialogBoxSlicer";
 import EmployeesTaskManagerDialogBoxForm from "../EmployeesTaskManagerDialogBoxForm";
 import { v4 as uuidv4 } from 'uuid';
+import ReactLoading from 'react-loading';
 
 import "../ShowEmployeesDataComponent/ShowEmployeesTask.css"
 import "../TaskDialogBox.css"
@@ -36,7 +37,7 @@ type EditEmployeesTaskDetailsDialogBoxProps = {
     // setEditDialogBox: React.Dispatch<React.SetStateAction<Boolean>>
 }
 
-function EditEmployeesTaskManagerDialogBox({ selectedUpdateTaskFieldUid }: EditEmployeesTaskDetailsDialogBoxProps) {
+function EditEmployeesTaskManagerDialogBox({ selectedUpdateTaskFieldUid, type, color }: any) {
     const employeeName = useAppSelector((state) => state.AddEmployeesTaskSlicer.employeeName)
     const employeeEmailId = useAppSelector((state) => state.AddEmployeesTaskSlicer.employeeEmailId)
     const employeeTaskDesc = useAppSelector((state) => state.AddEmployeesTaskSlicer.employeeTaskDesc)
@@ -51,7 +52,7 @@ function EditEmployeesTaskManagerDialogBox({ selectedUpdateTaskFieldUid }: EditE
     useEffect(() => {
         console.log(selectedUpdateTaskFieldUid)
     })
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <ReactLoading type={type} color={color} height={667} width={375} />    ;
 
     // const Dispatch = useAppDispatch();
 

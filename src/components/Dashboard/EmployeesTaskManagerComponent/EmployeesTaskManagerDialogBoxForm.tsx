@@ -6,9 +6,12 @@ import { setShowEmployeesDialogBox, setShowEmployeesEditDialogBox } from "../../
 import "./EmployeesTaskManagerDialogBoxForm.css"
 import Calendar from 'react-calendar';
 import { FaCross, FaTimes } from "react-icons/fa";
+import 'react-calendar/dist/Calendar.css';
 
 import { setTaskAssign } from "../../../ReduxSlicers/ShowTaskAssignEmployeeInDialogBoxSlicer";
+type ValuePiece = Date | null;
 
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 const showUsersEmailIdsQuery = gql`
 query fetchEmailUsersIds{
   fetchEmailUsersIds {
@@ -19,7 +22,13 @@ query fetchEmailUsersIds{
 `
 
 
-function EmployeesTaskManagerDialogBoxForm() {
+function EmployeesTaskManagerDialogBoxForm({type,color}:any) {
+    // const [date, setDate] = useState<any>(new Date());
+    // const [selectRange, setSelectRange] = useState<boolean>(false);
+
+    // const [value, onChange] = useState<Value>(new Date());
+    const [date, setDate] = useState(new Date());
+
 
     const { data: FetchUserData, loading, error, refetch } = useQuery(showUsersEmailIdsQuery);
 
@@ -32,15 +41,21 @@ function EmployeesTaskManagerDialogBoxForm() {
     const taskAssignedToEmployee = useAppSelector((state) => state.ShowTaskAssignEmployeeInDialogBoxSlicer.taskAssigned)
     const Dispatch = useAppDispatch();
 
+    
+    const onChange = (date:any) => {
+        setDate(date);
+      };
+
     const addSelectedUser = (currentUsers: String) => {
-        console.log(currentUsers)
 
         if (!selectedUsers.includes(currentUsers)) {
 
+            console.log(currentUsers)
             FetchUserData.fetchEmailUsersIds.find((val: any) => {
                 if (val.emailId === currentUsers) {
                     setSelectedUsers((prevUser: any) => [...prevUser, currentUsers])
                     Dispatch(setTaskAssign(true))
+                    Dispatch(SetEmployeeEmailId(selectedUsers));
                     return;
                 }
             })
@@ -55,10 +70,10 @@ function EmployeesTaskManagerDialogBoxForm() {
         // setSelectedUsers((prevUser:any)=>[...prevUser,currentUsers])
     }
 
-    // useEffect(() => {
-    //     Dispatch(SetEmployeeEmailId(selectedUsers));
+    useEffect(() => {
+        Dispatch(SetEmployeeEmailId(selectedUsers));
 
-    // })
+    })
 
     const removeSelectedUsers = (selectedEmailId: any) => {
         const updatedSelectedUsers = selectedUsers.filter((val: any) => {
@@ -74,12 +89,9 @@ function EmployeesTaskManagerDialogBoxForm() {
         Dispatch(setShowEmployeesEditDialogBox(false));
     }
 
-    // useEffect(() => {
-    //     console.log(selectedUsers)
-    // }, [selectedUsers])
+    //    if (loading) return <ReactLoading type={type} color={color} height={667} width={375} />        ;
 
-    if (loading) return <p>Loading...</p>;
-
+    if(loading) return <h3>Loading</h3>
 
     return (
         <div className="employee-dialog-box-div">
@@ -113,6 +125,7 @@ function EmployeesTaskManagerDialogBoxForm() {
                     <strong>Task Assigned to the Employee</strong>
                     {
                         selectedUsers.map((val: any) => {
+                            // console.log(val)
                             return (
                                 <div className="selected-employees-div">
                                     <p>{val}</p>
@@ -131,8 +144,25 @@ function EmployeesTaskManagerDialogBoxForm() {
 
             <input type="text" placeholder="Task Description" onChange={(e: any) => { Dispatch(setEmployeeTaskDesc(e.target.value)) }} />
             {/* <input type="text" placeholder="deadLine" onChange={(e: any) => { Dispatch(setEmployeeDeadLine(e.target.value)) }} /> */}
-            {/* //<input className="calendar" type="date"/> */}
-            {/* <Calendar/> */}
+            <input className="calendar" placeholder="deadLine" type="date" onChange={(e: any) => { Dispatch(setEmployeeDeadLine(e.target.value)) }} />
+            {/* <Calendar tileDisabled={tileDisabled}/> */}
+     {/* <input type="text"/> */}
+            {/* <Calendar className="react-calendar"  onClickDay={onChange} value={value} /> */}
+            {/* <Calendar showWeekNumbers onChange={onChange} value={date} /> */}
+
+
+            {/* <Calendar
+                date={date}
+                setDate={setDate}
+                selectRange={selectRange}
+                setSelectRange={setSelectRange}
+            /> */}
+            {/* <Calendar
+              value={date}
+              onChange={(date) => setDate(date)}
+              selectRange={selectRange}
+              setSelectRange={setSelectRange}
+            /> */}
 
         </div>
     )

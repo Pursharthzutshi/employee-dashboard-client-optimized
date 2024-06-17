@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setChangeLoginForm, setChangeSignUpForm } from "../../../ReduxSlicers/ChangeSignUpFormSlicer";
+import "../LoginComponent/ChangeLogInFormButtons.css"
 
 function ChangeLogInFormButtons() {
 
@@ -28,7 +29,8 @@ function ChangeLogInFormButtons() {
     }
     return (
         <div>
-            <form onSubmit={categorySignUpForm}>
+            <form className="login-toggle-form" onSubmit={categorySignUpForm}>
+                <strong>Choose Login:</strong>
                 <label>User Log In</label>
                 <input name="login-radio" type="checkbox" value="userSignUp" onChange={(e: React.ChangeEvent<HTMLInputElement>) => { toggleSignUpForm(e.target.value) }} />
                 <label>Admin Log in</label>

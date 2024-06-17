@@ -8,6 +8,7 @@ import ChangeSignUpFormButtons from "./ChangeSignUpFormButtons";
 import { v4 as uuidv4 } from 'uuid';
 import { setSignUpResponseStatus } from "../../../ReduxSlicers/SignUpResponseSlicer";
 import { SetEmployeeEmailId } from "../../../ReduxSlicers/AddEmployeesTaskSlicer";
+import NavBar from "../../NavBarComponent/NavBar";
 
 const signUpquery = gql`
 mutation create($userSignUpParameters: createUserSignUpInput!){
@@ -63,33 +64,51 @@ function SignupUsers() {
       <div className="signup-container">
 
         <div className="signup-box">
-          <h3>Create Employees Account</h3>
+        <h3 className="employee-account-heading">Create Employees Account</h3>
 
           <form onSubmit={signUpForm} className="signup-form">
 
-            <input type="text" placeholder="Name" onChange={(e) => Dispatch(setUserName(e.target.value))} />
-            <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserEmailId(e.target.value))} />
-            <input type="password" placeholder="Password" onChange={(e) => Dispatch(setEmailPassword(e.target.value))} />
-            <input type="category" placeholder="Retype Password" onChange={(e) => Dispatch(setEmailPasswordRecheck(e.target.value))} />
+            <div className="inputs-labels-container">
+              {/* <div className="labels-div">
 
-            <div className="gender-cateogry-div">
-              <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="male" type="radio" />
-              <label>Male</label>
-              <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="female" type="radio" />
-              <label>Female</label>
-              <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="others" type="radio" />
-              <label>Others</label>
+              </div> */}
+
+              <div className="inputs-div">
+              <strong>Name:</strong>
+
+                <input type="text" placeholder="Name" onChange={(e) => Dispatch(setUserName(e.target.value))} />
+                <strong>Password:</strong>
+
+                <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserEmailId(e.target.value))} />
+                <strong>EmailId:</strong>
+
+                <input type="password" placeholder="Password" onChange={(e) => Dispatch(setEmailPassword(e.target.value))} />
+                <strong>ReCheck Password:</strong>
+
+                <input type="category" placeholder="Retype Password" onChange={(e) => Dispatch(setEmailPasswordRecheck(e.target.value))} />
+
+
+                <strong>Gender:</strong>
+                <div className="gender-cateogry-div">
+                  <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="male" type="radio" />
+                  <label>Male</label>
+                  <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="female" type="radio" />
+                  <label>Female</label>
+                  <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="others" type="radio" />
+                  <label>Others</label>
+                </div>
+
+                <strong>Department:</strong>
+                <select className="select-department" onChange={(e) => Dispatch(setDepartment(e.target.value))}>
+                  <option>HR Department</option>
+                  <option>Software Department</option>
+                  <option>Testing Department</option>
+                  <option>UI/UX Design Department</option>
+                  <option>Sales Department</option>
+                </select>
+
+              </div>
             </div>
-
-            <br></br>
-
-            <select onChange={(e) => Dispatch(setDepartment(e.target.value))}>
-              <option>HR Department</option>
-              <option>Software Department</option>
-              <option>Testing Department</option>
-              <option>UI/UX Design Department</option>
-              <option>Sales Department</option>
-            </select>
 
             <button type="submit" onClick={() => {
               userSignUp({
@@ -106,12 +125,16 @@ function SignupUsers() {
                 },
               })
 
-            }}>Sign Up</button>
+            }}>Create Employee Account</button>
             {/* {
               d
             } */}
 
           </form>
+        </div>
+
+        <div className="sign-up-right-side-image">
+
         </div>
 
       </div>

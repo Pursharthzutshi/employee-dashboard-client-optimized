@@ -6,6 +6,7 @@ import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck,
 import { redirect, useNavigate } from "react-router-dom";
 import ChangeSignUpFormButtons from "./ChangeSignUpFormButtons";
 import { v4 as uuidv4 } from 'uuid';
+import NavBar from "../../NavBarComponent/NavBar";
 
 const signUpquery = gql`
 mutation adminSignUp($adminSignUpParameters: adminSignUpTableInput!){
@@ -35,6 +36,8 @@ function SignupAdmin() {
   }
 
   const [adminSignUp, { loading }] = useMutation(signUpquery);
+
+  if(loading) return <p>Loading</p>
 
   return (
     <div>

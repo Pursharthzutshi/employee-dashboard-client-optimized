@@ -13,6 +13,7 @@ const ShowTaskAssignEmployeeInDialogBoxSlicer = createSlice({
     initialState,
     reducers: {
         setTaskAssign: (state, action) => {
+            console.log(action.payload)
             state.taskAssigned = action.payload;
         }
     }

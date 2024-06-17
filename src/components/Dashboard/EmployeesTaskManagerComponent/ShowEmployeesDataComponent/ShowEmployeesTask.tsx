@@ -75,6 +75,9 @@ function ShowEmployeesTask() {
               <strong>TASK DESCRIPTION - : </strong>
 
               <p className="task-desc">{val.taskDesc}</p>
+
+              <strong>TASK DEADLINE - : </strong>
+
               <p>{val.deadLine}</p>
 
               <strong>TASK ASSIGNED TO - : </strong>
@@ -83,7 +86,9 @@ function ShowEmployeesTask() {
               </div>
               {
                 val.emailId.map((val: any) => {
+                  console.log(val)
                   return <div>
+
                     <p>{val}</p>
                   </div>
                 })

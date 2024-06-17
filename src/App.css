@@ -10,7 +10,7 @@ body {
 }
 
 .dashboard-container {
-    background-color: red;
+    background: linear-gradient(to left,rgb(52, 195, 252),rgb(78, 184, 255));
     box-shadow: .2px .2px 22px .2px rgb(232, 232, 232);
     height: 100%;
 }
@@ -19,5 +19,18 @@ body {
     margin-top: 10px;
     /* height: 100%; */
     background: white;
-    margin-left: 100px;
+    margin-left: 110px;
+}
+
+body::-webkit-scrollbar {
+    background: linear-gradient(to left,rgb(255, 255, 255),rgb(255, 255, 255));
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(to left,rgb(245, 245, 245),rgb(235, 235, 235));
+    border-radius: 2px;
+}
+
+body::-webkit-scrollbar-button {
+    display: hidden;
 }

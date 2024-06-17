@@ -54,7 +54,7 @@ function LoginUsers() {
 
             <ChangeLogInFormButtons />
 
-            <form onSubmit={loginForm}>
+            <form onSubmit={loginForm} className="login-form">
                 <h3>User Login In Form</h3>
 
                 <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserLoggedInEmailId(e.target.value))} />

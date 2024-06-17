@@ -96,12 +96,15 @@ function Home() {
             <NavBar />
             <CheckInStatus />
 
-            <h3>Home</h3>
+            {/* <h3>Home</h3> */}
             <div className="chart-div-container">
 
                 <GenderTypeChart />
                 <DepartmentChart />
+                <DepartmentChart />
+
             </div>
+            <br></br>
             <div className="chart-div-container">
 
 

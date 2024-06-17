@@ -49,7 +49,7 @@ function CheckInStatus() {
     return (
         <div className="check-in-status-container">
 
-            <button onClick={changeCheckInStatus}>Toggle</button>
+            {/* <button onClick={changeCheckInStatus}>Toggle</button> */}
 
         </div>
     )
