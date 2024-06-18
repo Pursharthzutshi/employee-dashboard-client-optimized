@@ -6,6 +6,7 @@ import { gql, useMutation } from "@apollo/client";
 import { Link, useNavigate } from "react-router-dom";
 import { setAdminStatus, setLoggedInSavedUid, setLogOutStatus, setShowLogOutButtonElements } from "../../../ReduxSlicers/LocalStorageSlicer";
 import ChangeLogInFormButtons from "./ChangeLogInFormButtons";
+import { FaSadCry } from "react-icons/fa";
 
 const checkUserLoggedInAuthQuery = gql`
 mutation adminLogin($adminLoginParameters: createAdminLoginInput!){
@@ -53,28 +54,37 @@ function LoginAdmin() {
     }
 
     return (
-        <div>
-            <ChangeLogInFormButtons />
-            <form onSubmit={loginForm} className="login-form">
-                <h3>Admin Login In Form</h3>
-                <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserLoggedInEmailId(e.target.value))} />
-                <input type="password" placeholder="password" onChange={(e) => Dispatch(setUserLoggedInEmailPassword(e.target.value))} />
-                <button onClick={() => {
-                    {
-                        checkAdminLoggedInAuth({
-                            variables: {
-                                adminLoginParameters: {
-                                    emailId: userLoggedinEmailId,
-                                    password: userLoggedInEmailPassword
+        <div className="login-component">
+            {/* <ChangeLogInFormButtons /> */}
+            <div className="login-left-sidebar-form-container">
+                {/* <div className="login-left-sidebar-div"> */}
+                {/* <h4>Login </h4> */}
+
+                {/* <FaSadCry/>
+            </div> */}
+                <form onSubmit={loginForm} className="login-form">
+                    <h3>Admin Login In Form</h3>
+                    <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserLoggedInEmailId(e.target.value))} />
+                    <input type="password" placeholder="password" onChange={(e) => Dispatch(setUserLoggedInEmailPassword(e.target.value))} />
+                    <button className="login-button" onClick={() => {
+                        {
+                            checkAdminLoggedInAuth({
+                                variables: {
+                                    adminLoginParameters: {
+                                        emailId: userLoggedinEmailId,
+                                        password: userLoggedInEmailPassword
+                                    }
                                 }
-                            }
-                        })
-                    }
-                }}>Login</button>
-                <Link to="/signUpAdmin">
-                    <button>Sign Up</button>
-                </Link>
-            </form>
+                            })
+                        }
+                    }}>Login</button>
+                    <p>OR</p>
+                    <p>Create a admin account now</p>
+                    <Link to="/signUpAdmin">
+                        <button className="sign-up-admin-button">Sign Up</button>
+                    </Link>
+                </form>
+            </div>
         </div>
     )
 }
