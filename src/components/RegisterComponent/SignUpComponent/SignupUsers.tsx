@@ -33,7 +33,7 @@ function SignupUsers() {
   const navigate = useNavigate()
 
 
-  const signUpForm = (e: any) => {
+  const signUpForm = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
     navigate("/")
   }

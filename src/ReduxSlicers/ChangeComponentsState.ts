@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit"
 
 type initialStateProps = {
     changeComponent: boolean,
-
 }
 
 const initialState: initialStateProps = {

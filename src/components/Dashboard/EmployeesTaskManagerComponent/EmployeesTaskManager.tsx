@@ -29,17 +29,16 @@ function EmployeesTaskManager() {
     return (
         <div className="employee-task-manager-component">
             <div className="tasks-component">
-            <NavBar/>
-            <h3>Employees Task</h3>
-            <button className="add-posts-dialog-box-button" onClick={showDialogBox}>Add Posts</button>
-            {
-                dialogBox && <AddEmployeesTaskManagerDialogBox />
-            }
+                <NavBar />
+                <h3>Employees Task</h3>
+                <button className="add-posts-dialog-box-button" onClick={showDialogBox}>Add Posts</button>
+                {
+                    dialogBox && <AddEmployeesTaskManagerDialogBox />
+                }
 
+                <ShowEmployeesTask />
 
-            <ShowEmployeesTask />
-
-        </div>
+            </div>
         </div>
     )
 }

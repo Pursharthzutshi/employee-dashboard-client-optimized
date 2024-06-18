@@ -3,17 +3,7 @@ import { useEffect, useState } from "react"
 import { Bar, Line, Pie } from "react-chartjs-2";
 import { useAppSelector } from "../../../../../ReduxHooks";
 
-export type chartDataProps = {
-  labels: string[] | undefined,
-  datasets: datasetsProps[]
-}
 
-export type datasetsProps = {
-  label: string,
-  data: number[],
-  backgroundColor?: string[],
-  borderWidth: number
-}
 function DepartmentChart() {
 
   const HRDepartment = useAppSelector((state) => state.ChartsDetailsSlicer.HRDepartment)
@@ -21,14 +11,6 @@ function DepartmentChart() {
   const testingDepartment = useAppSelector((state) => state.ChartsDetailsSlicer.testingDepartment)
   const UIUXDepartment = useAppSelector((state) => state.ChartsDetailsSlicer.UIUXDepartment)
   const salesDepartment = useAppSelector((state) => state.ChartsDetailsSlicer.salesDepartment)
-
-  useEffect(() => {
-    console.log(HRDepartment)
-    console.log(softwareDepartment)
-    console.log(testingDepartment)
-    console.log(UIUXDepartment)
-    console.log(salesDepartment)
-  })
 
   const data = {
     // labels: ["Total Department"],
@@ -57,18 +39,7 @@ function DepartmentChart() {
         display: false
 
       },
-      // x: {
-      //   grid: {
-      //     display: false
-      //   },
-
-      // },
-      //   xAxes: [{
-      //     angleLines: {
-      //       display: false
-      //     }
-      //   }]
-      // },
+      
     }
   }
 

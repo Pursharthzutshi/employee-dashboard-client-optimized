@@ -3,17 +3,7 @@ import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../../../ReduxHooks";
 import { Bar, Line } from "react-chartjs-2";
 
-export type chartDataProps = {
-  labels: string[] | undefined,
-  datasets: datasetsProps[]
-}
 
-export type datasetsProps = {
-  label: string,
-  data: number[],
-  backgroundColor?: string[],
-  borderWidth: number
-}
 function GenderTypeChart() {
 
 
@@ -49,28 +39,13 @@ function GenderTypeChart() {
         display: false
 
       },
-      // x: {
-      //   grid: {
-      //     display: false
-      //   },
 
-      // },
-      //   xAxes: [{
-      //     angleLines: {
-      //       display: false
-      //     }
-      //   }]
-      // },
     }
   }
 
   return (
     <div className="bar-chart-div">
-      {/* <select>
-        <option>Male</option>
-        <option>Female</option>
-        <option>others</option>
-      </select> */}
+   
       {
         chartData && <Bar className="doughnut-chart" options={options} data={data} />
       }

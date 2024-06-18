@@ -52,7 +52,7 @@ query qd {
 function Home() {
 
 
-    const { data: genderType, refetch } = useQuery(show_all_employees_data_query);
+    const { data: employeesData, refetch } = useQuery(show_all_employees_data_query);
 
     const count = useAppSelector((state) => state.ChartsDetailsSlicer.count)
     const departmentCount = useAppSelector((state) => state.ChartsDetailsSlicer.departmentCount)
@@ -69,24 +69,24 @@ function Home() {
             Dispatch(setSignUpResponseStatus(false))
         }
 
-        if (genderType && genderType.showAllEmployee) {
+        if (employeesData && employeesData.showAllEmployee) {
 
-            if (count !== genderType.showAllEmployee.length) {
-                genderType.showAllEmployee.map((val: any) => {
-                    return Dispatch(setGenderTypeCount(val))
+            if (count !== employeesData.showAllEmployee.length) {
+                employeesData.showAllEmployee.map((employeesDataList: any) => {
+                    return Dispatch(setGenderTypeCount(employeesDataList))
                 })
-                genderType.showAllEmployee.map((val: any) => {
-                    return Dispatch(setDepartmentCount(val))
+                employeesData.showAllEmployee.map((employeesDataList: any) => {
+                    return Dispatch(setDepartmentCount(employeesDataList))
                 })
             }
 
-            const totalGenderTypeCounts = genderType.showAllEmployee.length
-            Dispatch(setCount(totalGenderTypeCounts))
+            const totalDataCount = employeesData.showAllEmployee.length
+            Dispatch(setCount(totalDataCount))
 
             refetch()
         }
 
-    }, [genderType])
+    }, [employeesData])
 
 
 

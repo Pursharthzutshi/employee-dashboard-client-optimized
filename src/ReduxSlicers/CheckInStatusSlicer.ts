@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit"
 
 type genderTypeCountProps = {
     checkInStatus: boolean
-
 }
 
 const initialState: genderTypeCountProps = {

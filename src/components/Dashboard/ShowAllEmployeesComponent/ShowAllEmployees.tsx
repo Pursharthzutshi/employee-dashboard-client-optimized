@@ -1,23 +1,24 @@
-import React, { useEffect } from "react";
-import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useEffect } from "react";
+import { gql, useQuery } from "@apollo/client";
+import { useDispatch } from "react-redux";
+import { setSearchFilter } from "../../../ReduxSlicers/SearchFilterSilcer";
+import { useAppSelector } from "../../../ReduxHooks";
+import { EmployeesAccountDataProps } from "../../../Types/ShowAllEmployeesComponentTypes";
 import NavBar from "../../NavBarComponent/NavBar";
 
 
 import "../ShowAllEmployeesComponent/ShowAllEmployees.css"
-import { useDispatch } from "react-redux";
-import { setSearchFilter } from "../../../ReduxSlicers/SearchFilterSilcer";
-import { useAppSelector } from "../../../ReduxHooks";
 
 function ShowAllEmployees() {
 
     const searchFilter = useAppSelector((state) => state.SearchFilterSilcer.SearchFilter)
 
     const show_all_employees_data_query = gql`
- query qd{
-  showAllEmployee {
-    name
-    emailId
-  }
+         query fetchemployeesDataQuery{
+            showAllEmployee {
+            name
+            emailId
+   }
 }`
 
     const Dispatch = useDispatch()
@@ -44,20 +45,20 @@ function ShowAllEmployees() {
             <input onChange={(e) => Dispatch(setSearchFilter(e.target.value))} className="search-employees-input" placeholder="Search Employees" type="text" />
             <div className="employees-details-container">
                 {
-                    ShowAllEmployeesData.showAllEmployee.filter((val: any) => {
+                    ShowAllEmployeesData.showAllEmployee.filter((filteredEmployeesAccountData: EmployeesAccountDataProps) => {
 
-                        if (val.name.toLowerCase().includes(searchFilter.toLowerCase())) {
-                            console.log(val)
-                            return val;
+                        if (filteredEmployeesAccountData.name.toLowerCase().includes(searchFilter.toLowerCase())) {
+                            console.log(filteredEmployeesAccountData)
+                            return filteredEmployeesAccountData;
                         } else if (searchFilter === "") {
-                            return val;
+                            return filteredEmployeesAccountData;
                         }
-                    }).map((val: any) => {
+                    }).map((EmployeesAccountData: EmployeesAccountDataProps) => {
                         return (
                             <div className="employees-details-div" >
-                                <strong>Name:</strong><p>{val.name}</p>
-                                <strong>Email ID:</strong><p className="email-id">{val.emailId}</p>
-                                {adminStatus ? <button className="employees-details-button">Assign Employee of the month</button>:null}
+                                <strong>Name:</strong><p>{EmployeesAccountData.name}</p>
+                                <strong>Email ID:</strong><p className="email-id">{EmployeesAccountData.emailId}</p>
+                                {adminStatus ? <button className="employees-details-button">Assign Employee of the month</button> : null}
                             </div>
                         )
                     })

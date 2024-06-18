@@ -48,7 +48,7 @@ function LoginAdmin() {
     });
 
 
-    const loginForm = (e: any) => {
+    const loginForm = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
 
     }
@@ -57,11 +57,7 @@ function LoginAdmin() {
         <div className="login-component">
             {/* <ChangeLogInFormButtons /> */}
             <div className="login-left-sidebar-form-container">
-                {/* <div className="login-left-sidebar-div"> */}
-                {/* <h4>Login </h4> */}
-
-                {/* <FaSadCry/>
-            </div> */}
+            
                 <form onSubmit={loginForm} className="login-form">
                     <h3>Admin Login In Form</h3>
                     <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserLoggedInEmailId(e.target.value))} />

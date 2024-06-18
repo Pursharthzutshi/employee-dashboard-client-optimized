@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+type SignUpResponseSlicerProps = {
+    signUpResponseStatus: Boolean
+}
+
+const initialState:SignUpResponseSlicerProps = {
     signUpResponseStatus: false
 }
 

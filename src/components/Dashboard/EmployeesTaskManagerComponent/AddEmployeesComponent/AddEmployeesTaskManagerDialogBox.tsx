@@ -12,7 +12,6 @@ import "../TaskDialogBox.css"
 
 type addTaskDialogBoxProps = {
     setAddTaskDialogBox: React.Dispatch<React.SetStateAction<Boolean>>;
-    // FetchUserData:any
 }
 const addEmployeesTask = gql`
 mutation mt($employeesTaskParameters: createEmployeesTaskInput!){
