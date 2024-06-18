@@ -1,6 +1,6 @@
 import React from "react";
 import "../CardsDetailsComponent/CardsDetails.css"
-import { FaAccusoft } from "react-icons/fa";
+import { FaAccusoft, FaBuilding } from "react-icons/fa";
 
 function CardsDetails() {
     return (
@@ -18,7 +18,7 @@ function CardsDetails() {
                 </div>
 
                 <div className="card-details-div">
-                    <FaAccusoft className="cards-icons"/>
+                    <FaBuilding className="cards-icons"/>
 
                     <div>
                     <p>Total Departments</p>

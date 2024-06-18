@@ -6,6 +6,7 @@ import { setShowEmployeesDialogBox, setShowEmployeesEditDialogBox } from "../../
 import { useAppDispatch, useAppSelector } from "../../../../ReduxHooks";
 
 import EditEmployeesTaskManagerDialogBox from "../EditEmployeesDataComponents/EditEmployeesTaskManagerDialogBox";
+import { fetchEmployeesDetailsProps } from "../../../../Types/EmployeesTaskTypes";
 
 const fetch_employees_task_details_query = gql`
 query fetchEmployeesDetails{
@@ -24,12 +25,14 @@ mutation dq($employeeUidParameter: deleteEmployeesTaskInput!){
     emailId
   }
 }
+
 `
+
 
 
 function ShowEmployeesTask() {
 
-  const [selectedUpdateTaskFieldUid, setSelectedUpdateTaskFieldUid] = useState<string>("");
+  const [selectedUpdateTaskFieldUid, setSelectedUpdateTaskFieldUid] = useState<String>("");
 
   const { data: employeesTaskData, loading } = useQuery(fetch_employees_task_details_query)
 
@@ -47,7 +50,7 @@ function ShowEmployeesTask() {
 
   const Dispatch = useAppDispatch();
 
-  const showEditDialogBox = (val: any) => {
+  const showEditDialogBox = (val: String) => {
     Dispatch(setShowEmployeesEditDialogBox(true));
     console.log(val)
     setSelectedUpdateTaskFieldUid(val)
@@ -61,11 +64,10 @@ function ShowEmployeesTask() {
   return (
     <div className="employees-task-data-container">
       {
-        employeesTaskData.fetchEmployeesTaskDetails.map((val: any) => {
+        employeesTaskData.fetchEmployeesTaskDetails.map((val: fetchEmployeesDetailsProps) => {
           console.log(val.emailId)
           return (
             <div className="employees-task-data-div">
-              {/* <p>{val.uid}</p> */}
 
               <div>
                 <br></br>
@@ -85,7 +87,7 @@ function ShowEmployeesTask() {
                 {/* <span>{val.emailId}</span> */}
               </div>
               {
-                val.emailId.map((val: any) => {
+                val.emailId.map((val: String) => {
                   console.log(val)
                   return <div>
 

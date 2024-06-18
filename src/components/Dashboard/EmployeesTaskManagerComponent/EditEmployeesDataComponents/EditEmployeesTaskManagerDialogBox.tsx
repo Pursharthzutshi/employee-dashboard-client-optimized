@@ -1,13 +1,13 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../ReduxHooks";
 import { setShowEmployeesDialogBox, setShowEmployeesEditDialogBox } from "../../../../ReduxSlicers/ShowEmployeesDialogBoxSlicer";
 import EmployeesTaskManagerDialogBoxForm from "../EmployeesTaskManagerDialogBoxForm";
-import { v4 as uuidv4 } from 'uuid';
 import ReactLoading from 'react-loading';
 
 import "../ShowEmployeesDataComponent/ShowEmployeesTask.css"
 import "../TaskDialogBox.css"
+import { EditEmployeesTaskManagerDialogBoxProps } from "../../../../Types/EmployeesTaskTypes";
 
 const fetch_employees_task_details_query = gql`
 query fetchEmployeesDetails{
@@ -37,7 +37,7 @@ type EditEmployeesTaskDetailsDialogBoxProps = {
     // setEditDialogBox: React.Dispatch<React.SetStateAction<Boolean>>
 }
 
-function EditEmployeesTaskManagerDialogBox({ selectedUpdateTaskFieldUid, type, color }: any) {
+function EditEmployeesTaskManagerDialogBox({ selectedUpdateTaskFieldUid }: EditEmployeesTaskManagerDialogBoxProps) {
     const employeeName = useAppSelector((state) => state.AddEmployeesTaskSlicer.employeeName)
     const employeeEmailId = useAppSelector((state) => state.AddEmployeesTaskSlicer.employeeEmailId)
     const employeeTaskDesc = useAppSelector((state) => state.AddEmployeesTaskSlicer.employeeTaskDesc)
@@ -52,7 +52,7 @@ function EditEmployeesTaskManagerDialogBox({ selectedUpdateTaskFieldUid, type, c
     useEffect(() => {
         console.log(selectedUpdateTaskFieldUid)
     })
-    if (loading) return <ReactLoading type={type} color={color} height={667} width={375} />    ;
+    // if (loading) return <ReactLoading type={type} color={color} height={667} width={375} />    ;
 
     // const Dispatch = useAppDispatch();
 
