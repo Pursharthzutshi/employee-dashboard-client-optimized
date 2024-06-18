@@ -20,13 +20,14 @@ import NavBar from "../../NavBarComponent/NavBar";
 import { gql, useQuery, useSubscription } from "@apollo/client";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { resetCounts, resetDepartmentCounts, setCount, setDepartmentCount, setGenderTypeCount } from "../../../ReduxSlicers/ChartsDetailsSlicer";
-import { setSignUpResponseStatus } from "../../../ReduxSlicers/SignUpResponseSlicer";
+import { setCreateEmployeeNewAccountStatus } from "../../../ReduxSlicers/createEmployeeNewAccountStatusSlicer";
 import EmployeeStatus from "./EmployeeStatusComponent/EmployeeStatus";
 import CheckInStatus from "./EmployeeStatusComponent/CheckInStatusComponent/CheckInStatus";
 import GenderTypeChart from "./HomeCharts/GenderTypeChart/GenderTypeChart";
 import DepartmentChart from "./HomeCharts/DepartmentChart/DepartmentChart";
 import { setDepartment } from "../../../ReduxSlicers/SignUpSlicer";
 import CardsDetails from "./CardsDetailsComponent/CardsDetails";
+import EmployeeOfTheMonth from "./HomeCharts/EmployeeOfTheMonthComponent/EmployeeOfTheMonth";
 
 // Register the components
 ChartJS.register(
@@ -56,17 +57,17 @@ function Home() {
 
     const count = useAppSelector((state) => state.ChartsDetailsSlicer.count)
     const departmentCount = useAppSelector((state) => state.ChartsDetailsSlicer.departmentCount)
-    const signUpResponseStatus = useAppSelector((state) => state.SignUpResponseSlicer.signUpResponseStatus);
+    const createEmployeeNewAccountStatus = useAppSelector((state) => state.createEmployeeNewAccountStatusSlicer.createEmployeeNewAccountStatus);
 
     const Dispatch = useAppDispatch()
 
 
     useEffect(() => {
 
-        if (signUpResponseStatus === true) {
+        if (createEmployeeNewAccountStatus === true) {
             Dispatch(resetCounts());
             Dispatch(resetDepartmentCounts());
-            Dispatch(setSignUpResponseStatus(false))
+            Dispatch(setCreateEmployeeNewAccountStatus(false))
         }
 
         if (employeesData && employeesData.showAllEmployee) {
@@ -102,9 +103,7 @@ function Home() {
             <div className="chart-div-container">
 
                 <GenderTypeChart />
-                <div className="div">
-                    <h3>Employee Of The Month</h3>
-                </div>
+                <EmployeeOfTheMonth/>
                 <DepartmentChart />
 
             </div>

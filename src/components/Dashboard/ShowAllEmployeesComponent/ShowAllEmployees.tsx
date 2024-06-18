@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { setSearchFilter } from "../../../ReduxSlicers/SearchFilterSilcer";
 import { useAppSelector } from "../../../ReduxHooks";
@@ -9,13 +9,26 @@ import NavBar from "../../NavBarComponent/NavBar";
 
 import "../ShowAllEmployeesComponent/ShowAllEmployees.css"
 
+
+const update_Employee_Of_The_Month_query = gql`
+mutation updateEmployeeOfTheMonth($updateEmployeeOfTheMonthParameters: updateEmployeeOfTheMonthInput!){
+  updateEmployeeOfTheMonth(updateEmployeeOfTheMonthParameters: $updateEmployeeOfTheMonthParameters) {
+    uid,
+    employeeOfTheMonth
+  }
+}
+  `
+
 function ShowAllEmployees() {
+
+    const [assignEmployeeOfTheMonth] = useMutation(update_Employee_Of_The_Month_query);
 
     const searchFilter = useAppSelector((state) => state.SearchFilterSilcer.SearchFilter)
 
     const show_all_employees_data_query = gql`
          query fetchemployeesDataQuery{
             showAllEmployee {
+            uid
             name
             emailId
    }
@@ -28,6 +41,10 @@ function ShowAllEmployees() {
         }
     }
     );
+
+    // const assignEmployeeOfTheMonth = (val:any)=>{
+    //     console.log(val)
+    // }
 
     useEffect(() => {
         console.log(ShowAllEmployeesData)
@@ -54,11 +71,22 @@ function ShowAllEmployees() {
                             return filteredEmployeesAccountData;
                         }
                     }).map((EmployeesAccountData: EmployeesAccountDataProps) => {
+                        console.log(EmployeesAccountData)
                         return (
                             <div className="employees-details-div" >
                                 <strong>Name:</strong><p>{EmployeesAccountData.name}</p>
                                 <strong>Email ID:</strong><p className="email-id">{EmployeesAccountData.emailId}</p>
-                                {adminStatus ? <button className="employees-details-button">Assign Employee of the month</button> : null}
+                                {adminStatus ? <button onClick={() => {
+                                    assignEmployeeOfTheMonth({
+                                        variables: {
+                                            updateEmployeeOfTheMonthParameters: {
+                                                uid: EmployeesAccountData.uid,
+                                                employeeOfTheMonth: true
+                                            },
+                                        },
+                                    })
+
+                                }} className="employees-details-button">Assign Employee of the month</button> : null}
                             </div>
                         )
                     })

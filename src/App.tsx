@@ -1,21 +1,17 @@
 import './App.css';
 import LeftSidebar from './components/LeftSidebarComponent/LeftSidebar';
-import { Link, Route, Routes } from 'react-router-dom';
-import Login from './components/RegisterComponent/LoginComponent/LoginUsers';
+import { Route, Routes } from 'react-router-dom';
 import EmployeesTaskManager from './components/Dashboard/EmployeesTaskManagerComponent/EmployeesTaskManager';
 import Home from './components/Dashboard/HomeComponent/Home';
 import ShowAllEmployees from './components/Dashboard/ShowAllEmployeesComponent/ShowAllEmployees';
-import SignUp from './components/RegisterComponent/SignUpComponent/ChangeSignUpFormButtons';
-import SignupUsers from './components/RegisterComponent/SignUpComponent/SignupUsers';
-import SignupAdmin from './components/RegisterComponent/SignUpComponent/SignUpAdmin';
-import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from './ReduxHooks';
+import SignupAdmin from './components/RegisterComponent/SignUpComponent/CreateNewEmployeeAccount';
+import { useEffect } from 'react';
+import { useAppSelector } from './ReduxHooks';
 import LoginUsers from './components/RegisterComponent/LoginComponent/LoginUsers';
 import LoginAdmin from './components/RegisterComponent/LoginComponent/LoginAdmin';
 import AssignedEmployeesTask from './components/Dashboard/UserComponents/AssignedEmployeesTask';
-import { setChangeComponent } from './ReduxSlicers/ChangeComponentsState';
 import EmployeesHome from './components/Dashboard/UserComponents/EmployeesHome';
-import { setAdminStatus, setLogOutStatus } from './ReduxSlicers/LocalStorageSlicer';
+import CreateNewEmployeeAccount from './components/Dashboard/CreateNewEmployeeAccountComponent/CreateNewEmployeeAccount';
 
 
 function App() {
@@ -58,7 +54,7 @@ function App() {
           changeLoginForm ? <LoginUsers /> : <LoginAdmin />}
         />
 
-        <Route path="/createEmployeeNewAccount" element={<SignupUsers />} />
+        <Route path="/createEmployeeNewAccount" element={<CreateNewEmployeeAccount />} />
 
         <Route path="/signUpAdmin" element={<SignupAdmin />} />
 

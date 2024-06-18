@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SignupUsers from "./SignupUsers";
-import SignupAdmin from "./SignUpAdmin";
+import SignupAdmin from "./CreateNewEmployeeAccount";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setChangeSignUpForm } from "../../../ReduxSlicers/ChangeSignUpFormSlicer";
 

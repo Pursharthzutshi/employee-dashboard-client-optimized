@@ -22,22 +22,15 @@ h3 {
 
 .bar-chart-div,.pie-chart-div {
     border-radius: 8px;
-    padding: 8px 18px 2px 18px;
+    padding: 18px 18px 2px 18px;
     box-shadow: .2px .2px 2px .2px lightgray;
     margin-top: 40px;
-    height: 20rem;
+    height: 18rem;
 }
 
 .bar-chart-div{
-    width: 42%;
+    width: 55%;
 
-}
-.div{
-    /* margin-left: 120px; */
-    margin-top: 45px;
-    width: 50%;
-    /* height: 40vh; */
-    box-shadow: .2px .2px 2px .2px lightgray;
 }
 
 .pie-chart-div{

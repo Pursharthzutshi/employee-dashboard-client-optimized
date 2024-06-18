@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./LoginUsers.css"
 import "./LoginAdmin.css"
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserLoggedInEmailId, setUserLoggedInEmailPassword } from "../../../ReduxSlicers/LoginSlicer";
@@ -55,7 +56,7 @@ function LoginAdmin() {
 
     return (
         <div className="login-component">
-            {/* <ChangeLogInFormButtons /> */}
+            <ChangeLogInFormButtons />
             <div className="login-left-sidebar-form-container">
             
                 <form onSubmit={loginForm} className="login-form">

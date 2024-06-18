@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./SignupUsers.css"
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck, setGenderType, setDepartment } from "../../../ReduxSlicers/SignUpSlicer";
 import { redirect, useNavigate } from "react-router-dom";
-import ChangeSignUpFormButtons from "./ChangeSignUpFormButtons";
+// import ChangeSignUpFormButtons from "./ChangeSignUpFormButtons";
 import { v4 as uuidv4 } from 'uuid';
-import { SetEmployeeEmailId } from "../../../ReduxSlicers/AddEmployeesTaskSlicer";
-import NavBar from "../../NavBarComponent/NavBar";
 import { setCreateEmployeeNewAccountStatus } from "../../../ReduxSlicers/createEmployeeNewAccountStatusSlicer";
+
+import "./CreateNewEmployeeAccount.css"
 
 const signUpquery = gql`
 mutation create($userSignUpParameters: createUserSignUpInput!){
@@ -19,7 +18,7 @@ message
 }
 `
 
-function SignupUsers() {
+function CreateNewEmployeeAccount() {
 
   const userName = useAppSelector((state) => state.SignUpSlicer.userName)
   const userEmailId = useAppSelector((state) => state.SignUpSlicer.userEmailId)
@@ -38,15 +37,12 @@ function SignupUsers() {
     // navigate("/")
   }
 
-  useEffect(() => {
 
-  })
-
-  const createEmployeeNewAccountStatus = useAppSelector((state) => state.createEmployeeNewAccountStatusSlicer.createEmployeeNewAccountStatus);
+  const signUpResponseStatus = useAppSelector((state) => state.createEmployeeNewAccountStatusSlicer.createEmployeeNewAccountStatus);
 
   const [newEmployeeAccountCreatedStatus, setNewEmployeeAccountCreatedStatus] = useState(false);
 
-  const [userSignUp, { data: signUpResponseData, loading }] = useMutation(signUpquery, {
+  const [CreateEmployeeNewAccount, { data: signUpResponseData, loading }] = useMutation(signUpquery, {
 
 
 
@@ -65,16 +61,16 @@ function SignupUsers() {
   useEffect(() => {
     setNewEmployeeAccountCreatedStatus(false);
 
-    console.log(createEmployeeNewAccountStatus)
+    console.log(signUpResponseStatus)
   }, [])
 
   return (
     <div>
       {/* <ChangeSignUpFormButtons /> */}
 
-      <div className="signup-container">
+      <div className="create-new-employee-account-container">
 
-        <div className="signup-box">
+        <div className="create-new-employee-account-box">
           <h3 className="employee-account-heading">Create Employees Account</h3>
 
           <form onSubmit={signUpForm} className="signup-form">
@@ -132,7 +128,7 @@ function SignupUsers() {
             </div>
 
             <button type="submit" onClick={() => {
-              userSignUp({
+              CreateEmployeeNewAccount({
                 variables: {
                   userSignUpParameters: {
                     uid: uuidv4(),
@@ -141,7 +137,8 @@ function SignupUsers() {
                     password: userEmailPassword,
                     genderType: genderType,
                     status: false,
-                    department: department
+                    department: department,
+                    employeeOfTheMonth:false
                   },
                 },
               })
@@ -164,4 +161,4 @@ function SignupUsers() {
   )
 }
 
-export default SignupUsers;
+export default CreateNewEmployeeAccount;

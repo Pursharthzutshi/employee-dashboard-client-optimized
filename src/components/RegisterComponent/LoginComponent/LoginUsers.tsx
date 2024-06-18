@@ -50,16 +50,17 @@ function LoginUsers() {
 
 
     return (
-        <div>
+        <div className="login-component">
 
             <ChangeLogInFormButtons />
+            <div className="login-left-sidebar-form-container">
 
             <form onSubmit={loginForm} className="login-form">
                 <h3>User Login In Form</h3>
 
                 <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserLoggedInEmailId(e.target.value))} />
                 <input type="password" placeholder="password" onChange={(e) => Dispatch(setUserLoggedInEmailPassword(e.target.value))} />
-                <button onClick={() => {
+                <button className="sign-up-admin-button" onClick={() => {
                     {
                         checkUserLoggedInAuth({
                             variables: {
@@ -73,6 +74,7 @@ function LoginUsers() {
                     }
                 }}>Login</button>
             </form>
+            </div>
         </div>
     )
 }
