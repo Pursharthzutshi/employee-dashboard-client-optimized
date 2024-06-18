@@ -3,7 +3,7 @@ import "./SignupUsers.css"
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserName, setUserEmailId, setEmailPassword, setEmailPasswordRecheck, setAdminSignUpSecret } from "../../../ReduxSlicers/SignUpSlicer";
-import { redirect, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import ChangeSignUpFormButtons from "./ChangeSignUpFormButtons";
 import { v4 as uuidv4 } from 'uuid';
 import NavBar from "../../NavBarComponent/NavBar";
@@ -37,7 +37,7 @@ function SignupAdmin() {
 
   const [adminSignUp, { loading }] = useMutation(signUpquery);
 
-  if(loading) return <p>Loading</p>
+  if (loading) return <p>Loading</p>
 
   return (
     <div>
@@ -73,6 +73,8 @@ function SignupAdmin() {
             {/* {
               d
             } */}
+            <Link to="/">Login</Link>
+
           </form>
         </div>
 

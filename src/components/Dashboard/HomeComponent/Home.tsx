@@ -26,6 +26,7 @@ import CheckInStatus from "./EmployeeStatusComponent/CheckInStatusComponent/Chec
 import GenderTypeChart from "./HomeCharts/GenderTypeChart/GenderTypeChart";
 import DepartmentChart from "./HomeCharts/DepartmentChart/DepartmentChart";
 import { setDepartment } from "../../../ReduxSlicers/SignUpSlicer";
+import CardsDetails from "./CardsDetailsComponent/CardsDetails";
 
 // Register the components
 ChartJS.register(
@@ -94,13 +95,16 @@ function Home() {
 
 
             <NavBar />
+
             <CheckInStatus />
 
-            {/* <h3>Home</h3> */}
+            <CardsDetails />
             <div className="chart-div-container">
 
                 <GenderTypeChart />
-                <DepartmentChart />
+                <div className="div">
+                    <h3>Employee Of The Month</h3>
+                </div>
                 <DepartmentChart />
 
             </div>
@@ -108,7 +112,8 @@ function Home() {
             <div className="chart-div-container">
 
 
-                <EmployeeStatus />
+                {/* <EmployeeStatus /> */}
+                {/* <DepartmentChart /> */}
 
             </div>
 

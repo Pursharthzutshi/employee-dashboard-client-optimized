@@ -3,7 +3,7 @@ import "./LoginAdmin.css"
 import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserLoggedInEmailId, setUserLoggedInEmailPassword } from "../../../ReduxSlicers/LoginSlicer";
 import { gql, useMutation } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setAdminStatus, setLoggedInSavedUid, setLogOutStatus, setShowLogOutButtonElements } from "../../../ReduxSlicers/LocalStorageSlicer";
 import ChangeLogInFormButtons from "./ChangeLogInFormButtons";
 
@@ -37,7 +37,7 @@ function LoginAdmin() {
             console.log(data)
             if (data.createAdminLogin.admin === true) {
                 Dispatch(setAdminStatus(true))
-                navigate("/")
+                navigate("/home")
                 Dispatch(setShowLogOutButtonElements(true));
                 Dispatch(setLoggedInSavedUid(data.createAdminLogin.uid));
             } else {
@@ -71,6 +71,9 @@ function LoginAdmin() {
                         })
                     }
                 }}>Login</button>
+                <Link to="/signUpAdmin">
+                    <button>Sign Up</button>
+                </Link>
             </form>
         </div>
     )

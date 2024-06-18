@@ -32,7 +32,7 @@ function LoginUsers() {
 
             if (data.createUserLogin.success === true) {
                 console.log(data)
-                navigate("/")
+                navigate("/home")
                 Dispatch(setAdminStatus(false));
                 Dispatch(setShowLogOutButtonElements(true));
                 Dispatch(setLoggedInSavedUid(data.createUserLogin.uid));

@@ -31,10 +31,13 @@ function DepartmentChart() {
   })
 
   const data = {
+    // labels: ["Total Department"],
+
     datasets: [
       {
-        label: 'NUMBER OF DEPARTMENTS',
+        // labels: ["HR Department", "Software Department", "Testing Department", "UI UX Design Department", "Sales Department"],
         data: [HRDepartment, softwareDepartment, testingDepartment, UIUXDepartment, salesDepartment],
+
         backgroundColor: ['rgb(0, 113, 212)', 'rgb(0, 85, 170)', 'rgb(0 142 184)', 'darkblue', 'blue'],
       },
 
@@ -45,7 +48,7 @@ function DepartmentChart() {
   }
 
   const options = {
-
+    
     scales: {
       x: {
         display: false
@@ -70,9 +73,9 @@ function DepartmentChart() {
   }
 
   return (
-    <div className="bar-chart-div">
+    <div className="pie-chart-div">
       {
-        <Pie className="doughnut-chart" options={options} data={data} />
+        <Pie className="pie-chart" options={options} data={data} />
       }
     </div>
   )

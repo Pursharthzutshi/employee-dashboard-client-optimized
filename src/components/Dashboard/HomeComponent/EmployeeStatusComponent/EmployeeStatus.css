@@ -17,8 +17,8 @@
 .employee-status-container {
     /* justify-content: space-evenly; */
     padding: 2px 2px 2px 12px;
-    width: 50%;
-    /* height: 40vh; */
+    width: 47%;
+    height: 40vh;
     box-shadow: .2px .2px 2px .2px lightgray;
     /* background-color: aliceblue; */
 }

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./LeftSidebar.css"
 import { FaAddressBook, FaBeer, FaChevronCircleUp, FaCogs, FaHome, FaPersonBooth, FaProductHunt, FaSignInAlt, FaSignOutAlt, FaUserPlus } from "react-icons/fa";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, useNavigate } from "react-router-dom";
 import { setShowLogOutButtonElements, setLogOutStatus, setAdminStatus } from "../../ReduxSlicers/LocalStorageSlicer";
 import { useAppDispatch, useAppSelector } from "../../ReduxHooks";
 import HomePageImage from "../RegisterComponent/images/homepage.png"
@@ -13,6 +13,7 @@ import logoutImage from "../RegisterComponent/images/arrow.png"
 
 function LeftSidebar() {
     const showLogOutButtonElements = useAppSelector((state: any) => state.LocalStorageSlicer.showLogOutButtonElements)
+    const navigate = useNavigate()
 
     const Dispatch = useAppDispatch();
 
@@ -20,6 +21,8 @@ function LeftSidebar() {
         Dispatch(setShowLogOutButtonElements(false))
         Dispatch(setLogOutStatus(false))
         Dispatch(setAdminStatus(false))
+        navigate("/")
+
     }
 
     return (
@@ -29,7 +32,7 @@ function LeftSidebar() {
                 {/* <img className="left-sidebar-icon-image" src={image}/> */}
 
                 <div className="left-sidebar-icons-div">
-                    <Link className="left-sidebar-links" to="/">
+                    <Link className="left-sidebar-links" to="/home">
                         <img className="left-sidebar-icon-image" src={HomePageImage} />
                         <p >Home</p>
 
@@ -47,7 +50,7 @@ function LeftSidebar() {
 
                     </Link>
 
-                    <Link className="left-sidebar-links" to="/signup">
+                    <Link className="left-sidebar-links" to="/createEmployeeNewAccount">
                         <img className="left-sidebar-icon-image" src={addEmployee} />
                         <p >Add Employee</p>
 
@@ -66,7 +69,7 @@ function LeftSidebar() {
                                 :
 
                                 <Link className="left-sidebar-links" to="/login">
-                                    <FaSignInAlt to="/login" />
+                                    <FaSignInAlt to="/" />
                                     <p>Login</p>
                                 </Link>
                 }

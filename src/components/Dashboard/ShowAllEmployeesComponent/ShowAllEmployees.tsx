@@ -31,6 +31,7 @@ function ShowAllEmployees() {
     useEffect(() => {
         console.log(ShowAllEmployeesData)
     })
+    const adminStatus = useAppSelector((state) => state.LocalStorageSlicer.adminStatus)
 
     if (loading) return <p>Loading...</p>
 
@@ -56,6 +57,7 @@ function ShowAllEmployees() {
                             <div className="employees-details-div" >
                                 <strong>Name:</strong><p>{val.name}</p>
                                 <strong>Email ID:</strong><p className="email-id">{val.emailId}</p>
+                                {adminStatus ? <button>Assign Employee of the month</button>:null}
                             </div>
                         )
                     })

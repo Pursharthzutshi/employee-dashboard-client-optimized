@@ -32,6 +32,7 @@ function GenderTypeChart() {
         label: 'NUMBER OF EMPLOYEES',
         data: [maleCount + femaleCount + othersCount, maleCount, femaleCount, othersCount],
         backgroundColor: ['rgb(0, 113, 212)', 'rgb(0, 85, 170)', "rgb(0 142 184)"],
+        // borderWidth:"2px"
       },
 
 
@@ -42,7 +43,7 @@ function GenderTypeChart() {
 
     scales: {
       x: {
-        display: false
+        // display: false
       },
       y: {
         display: false
@@ -65,6 +66,11 @@ function GenderTypeChart() {
 
   return (
     <div className="bar-chart-div">
+      {/* <select>
+        <option>Male</option>
+        <option>Female</option>
+        <option>others</option>
+      </select> */}
       {
         chartData && <Bar className="doughnut-chart" options={options} data={data} />
       }

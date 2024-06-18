@@ -25,7 +25,7 @@ function App() {
 
   const adminStatus = useAppSelector((state) => state.LocalStorageSlicer.adminStatus)
 
-
+  const logOutButton = useAppSelector((state) => state.LocalStorageSlicer.showLogOutButtonElements)
 
   useEffect(() => {
     console.log('adminStatus from localStorage:', localStorage.getItem('adminStatus'));
@@ -36,9 +36,12 @@ function App() {
 
       {/* <button onClick={() => Dispatch(setChangeComponent(true))}>change</button> */}
 
-      <LeftSidebar />
+      {
+        logOutButton ? <LeftSidebar /> : null
+      }
+
       <Routes>
-        <Route path="/" element=
+        <Route path="/home" element=
           {
             adminStatus ? <Home /> : <EmployeesHome />
           }
@@ -51,11 +54,13 @@ function App() {
 
         <Route path="/showAllEmployeesData" element={<ShowAllEmployees />} />
 
-        <Route path="/login" element={
+        <Route path="/" element={
           changeLoginForm ? <LoginUsers /> : <LoginAdmin />}
         />
 
-        <Route path="/signup" element={<SignupUsers />} />
+        <Route path="/createEmployeeNewAccount" element={<SignupUsers />} />
+
+        <Route path="/signUpAdmin" element={<SignupAdmin />} />
 
       </Routes>
 
