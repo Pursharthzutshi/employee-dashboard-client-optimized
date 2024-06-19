@@ -62,23 +62,16 @@
 .gender-cateogry-div {
     margin-top: 20px;
     gap: 5px;
-    /* align-items: center; */
 }
 
-.gender-cateogry-div input {
-    margin-top: -10px;
-}
 
 .gender-type {
-    margin-left: 10px;
-    background-color: none;
-    box-shadow: none;
+    margin-top: -10px;
 }
 
 .inputs-labels-container {
 
     gap: 180px;
-    /* justify-content: space-eve; */
 }
 
 .create-new-employee-account-box input {

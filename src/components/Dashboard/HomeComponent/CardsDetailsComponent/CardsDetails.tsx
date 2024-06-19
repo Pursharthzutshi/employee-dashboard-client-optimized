@@ -30,7 +30,7 @@ function CardsDetails() {
     const [totalEmployeesCount, setTotalEmployeesCount] = useState(0);
     const [totalEmployeesTask, setTotalEmployeesTask] = useState(0);
 
-    const [totalDepartmentList,setTotalDepartmentList] = useState<any>([]);
+    const [totalDepartmentList, setTotalDepartmentList] = useState<any>([]);
 
     const { loading: EmployeesAccountDetailsLoading } = useQuery(fetchTotalEmployeesAndDepartmentsQuery, ({
         onCompleted: (EmployeesAccountDetailsData) => {
@@ -71,10 +71,10 @@ function CardsDetails() {
     }))
 
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(totalDepartmentList)
 
-    },[])
+    }, [])
 
     if (EmployeesAccountDetailsLoading) return <p>Loading ...</p>
     if (EmployeesTotalTasksLoading) return <p>Loading ...</p>

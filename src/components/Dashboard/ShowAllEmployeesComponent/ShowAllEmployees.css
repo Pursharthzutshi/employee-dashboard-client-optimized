@@ -23,7 +23,6 @@
 }
 
 .search-employees-input {
-
     width: 50%;
     margin-left: 10px;
     border: none;
@@ -81,3 +80,28 @@
      word-wrap: break-word;
 
 } */
+
+
+.no-employee-div{
+    display: flex;
+}
+
+.no-employee-div{
+    flex-direction: column;
+}
+
+.no-employee-div{
+    height: 80vh;
+    /* box-shadow: .2px .2px 12px .2px; */
+    justify-content: center;
+    align-items: center;
+}
+
+.add-new-employee-link{
+    color:black;
+    font-size: .9rem;
+    /* border: 2px solid black; */
+    text-decoration: none;
+    padding:4px 12px 4px 12px;
+    box-shadow: .2px .2px 2px .2px lightgray;
+}

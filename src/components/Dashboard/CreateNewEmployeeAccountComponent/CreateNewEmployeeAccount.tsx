@@ -8,7 +8,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { setCreateEmployeeNewAccountStatus } from "../../../ReduxSlicers/createEmployeeNewAccountStatusSlicer";
 
 import "./CreateNewEmployeeAccount.css"
-
+const show_all_employees_data_query = gql`
+query fetchemployeesDataQuery{
+   showAllEmployee {
+   uid
+   name
+   emailId
+}
+}`
 const signUpquery = gql`
 mutation create($userSignUpParameters: createUserSignUpInput!){
 createUserSignUp(userSignUpParameters: $userSignUpParameters) {
@@ -40,27 +47,50 @@ function CreateNewEmployeeAccount() {
 
   const signUpResponseStatus = useAppSelector((state) => state.createEmployeeNewAccountStatusSlicer.createEmployeeNewAccountStatus);
 
+  const createEmployeeNewAccountStatus = useAppSelector((state)=>state.createEmployeeNewAccountStatusSlicer.createEmployeeNewAccountStatus)
+
   const [newEmployeeAccountCreatedStatus, setNewEmployeeAccountCreatedStatus] = useState(false);
+
+  const [createNewEmployeeAccountErrorMessage,setCreateNewEmployeeAccountErrorMessage] = useState("");
+
+  // const [createNewEmployeeAccountErrorMessageStatus,setCreateNewEmployeeAccountErrorMessageStatus] = useState(false);
 
   const [CreateEmployeeNewAccount, { data: signUpResponseData, loading }] = useMutation(signUpquery, {
 
-
-
-    onCompleted: (data) => {
-      console.log(data.createUserSignUp.success)
-      if (data.createUserSignUp.success === true) {
+    onCompleted: (createNewEmployeeAccountData) => {
+      console.log(createEmployeeNewAccountStatus)
+      if (createNewEmployeeAccountData.createUserSignUp.success === true) {
         Dispatch(setCreateEmployeeNewAccountStatus(true))
         setNewEmployeeAccountCreatedStatus(true)
+      }else if(createNewEmployeeAccountData.createUserSignUp.success === false){
+        setCreateNewEmployeeAccountErrorMessage(createNewEmployeeAccountData.createUserSignUp.message);
+        Dispatch(setCreateEmployeeNewAccountStatus(false))
       }
-    }
+    },
+  
+    // update:(cache,{data:{createUserSignUp}})=>{
+    //   const existingEmployee:any = cache.readQuery({query:show_all_employees_data_query})
+    //   console.log(existingEmployee)
+    //   const newList = {
+    //     showAllEmployee:[...existingEmployee.showAllEmployee,createUserSignUp]
+    //   }
+      
+    // cache.writeQuery({
+    //   query:signUpquery,
+    //   data:newList  
+    // })
+
+    // }
+
+
   });
 
   setTimeout(() => {
     setNewEmployeeAccountCreatedStatus(false);
-  }, 3000)
+  }, 5000)
+
   useEffect(() => {
     setNewEmployeeAccountCreatedStatus(false);
-
     console.log(signUpResponseStatus)
   }, [])
 
@@ -92,32 +122,33 @@ function CreateNewEmployeeAccount() {
             
 
                 <strong>Name:</strong>
-
                 <input type="text" placeholder="Name" onChange={(e) => Dispatch(setUserName(e.target.value))} />
-                <strong>Password:</strong>
 
-                <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserEmailId(e.target.value))} />
                 <strong>EmailId:</strong>
+                <input type="email" placeholder="EmailId" onChange={(e) => Dispatch(setUserEmailId(e.target.value))} />
 
+
+                <strong>Password:</strong>
                 <input type="password" placeholder="Password" onChange={(e) => Dispatch(setEmailPassword(e.target.value))} />
-                <strong>ReCheck Password:</strong>
 
-                <input type="category" placeholder="Retype Password" onChange={(e) => Dispatch(setEmailPasswordRecheck(e.target.value))} />
+                <strong>Re Check Password:</strong>
+                <input type="password" placeholder="Retype Password" onChange={(e) => Dispatch(setEmailPasswordRecheck(e.target.value))} />
 
 
                 <strong>Gender:</strong>
                 <div className="gender-cateogry-div">
-                  <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="male" type="radio" />
-                  <label>Male</label>
-                  <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="female" type="radio" />
-                  <label>Female</label>
-                  <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="others" type="radio" />
-                  <label>Others</label>
+                <label>Male</label>
+                <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="male" type="radio" />
+                <label>Female</label>
+                <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="female" type="radio" />
+                <label>Others</label>
+                <input onChange={(e) => Dispatch(setGenderType(e.target.value))} className="gender-type" name="gender" value="others" type="radio" />
                 </div>
 
                 <strong>Department:</strong>
                 <select className="select-department" onChange={(e) => Dispatch(setDepartment(e.target.value))}>
-                  <option>HR Department</option>
+                <option  disabled selected>Select Department:</option>
+                <option>HR Department</option>
                   <option>Software Department</option>
                   <option>Testing Department</option>
                   <option>UI/UX Design Department</option>
@@ -144,16 +175,16 @@ function CreateNewEmployeeAccount() {
               })
 
             }}>Create Employee Account</button>
-            {/* {
-              d
+
+            {/* {createEmployeeNewAccountStatus ? null:
+              <p>{createNewEmployeeAccountErrorMessage}</p>
             } */}
 
           </form>
+          
         </div>
 
-        <div className="sign-up-right-side-image">
-
-        </div>
+        <div className="sign-up-right-side-image"></div>
 
       </div>
 

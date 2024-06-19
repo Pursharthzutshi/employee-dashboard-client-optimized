@@ -70,9 +70,7 @@ function SignupAdmin() {
                 },
               })
             }}>Admin Sign Up</button>
-            {/* {
-              d
-            } */}
+  
             <Link to="/">Login</Link>
 
           </form>
