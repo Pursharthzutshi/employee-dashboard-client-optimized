@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../ReduxHooks";
 import { setUserLoggedInEmailId, setUserLoggedInEmailPassword } from "../../../ReduxSlicers/LoginSlicer";
 import { gql, useMutation } from "@apollo/client";
 import { Link, useNavigate } from "react-router-dom";
-import { setAdminStatus, setLoggedInSavedUid, setLogOutStatus, setShowLogOutButtonElements } from "../../../ReduxSlicers/LocalStorageSlicer";
+import { setAdminStatus, setLoggedInSavedUid, setLogOutStatus, setSavedLoggedInName, setShowLogOutButtonElements } from "../../../ReduxSlicers/LocalStorageSlicer";
 import ChangeLogInFormButtons from "./ChangeLogInFormButtons";
 import { FaSadCry } from "react-icons/fa";
 
@@ -17,6 +17,8 @@ mutation adminLogin($adminLoginParameters: createAdminLoginInput!){
     message
     token
     admin
+    name
+    
   }
 }
 `
@@ -27,6 +29,8 @@ function LoginAdmin() {
     const userLoggedinEmailId = useAppSelector((state) => state.LoginSlicer.userLoggedinEmailId)
     const userLoggedInEmailPassword = useAppSelector((state) => state.LoginSlicer.userLoggedinPassword)
 
+    const [loginErrorMessageStatus, setLoginErrorMessageStatus] = useState<Boolean>(false);
+    const [loginErrorMessage, setLoginErrorMessage] = useState("")
 
     const Dispatch = useAppDispatch()
     // const [] = useState("");
@@ -34,17 +38,24 @@ function LoginAdmin() {
     const navigate = useNavigate()
 
     const [checkAdminLoggedInAuth] = useMutation(checkUserLoggedInAuthQuery, {
-        onCompleted: (data) => {
+        onCompleted: (adminLoginData) => {
 
-            console.log(data)
-            if (data.createAdminLogin.admin === true) {
+            console.log(adminLoginData)
+            if (adminLoginData.createAdminLogin.admin === true) {
+                Dispatch(setSavedLoggedInName(adminLoginData.createAdminLogin.name))
                 Dispatch(setAdminStatus(true))
                 navigate("/home")
+                console.log(adminLoginData.createAdminLogin)
                 Dispatch(setShowLogOutButtonElements(true));
-                Dispatch(setLoggedInSavedUid(data.createAdminLogin.uid));
+                Dispatch(setLoggedInSavedUid(adminLoginData.createAdminLogin.uid));
+                setLoginErrorMessageStatus(false);
+
             } else {
+                setLoginErrorMessageStatus(true);
+                setLoginErrorMessage(adminLoginData.createAdminLogin.message);
                 Dispatch(setShowLogOutButtonElements(false));
             }
+
         },
     });
 
@@ -58,7 +69,7 @@ function LoginAdmin() {
         <div className="login-component">
             <ChangeLogInFormButtons />
             <div className="login-left-sidebar-form-container">
-            
+
                 <form onSubmit={loginForm} className="login-form">
                     <h3>Admin Login In Form</h3>
                     <input type="text" placeholder="EmailId" onChange={(e) => Dispatch(setUserLoggedInEmailId(e.target.value))} />
@@ -75,11 +86,18 @@ function LoginAdmin() {
                             })
                         }
                     }}>Login</button>
+                    <p>
+                        {
+                        loginErrorMessageStatus &&
+                            <p>{loginErrorMessage}</p>
+                        }
+                    </p>
                     <p>OR</p>
                     <p>Create a admin account now</p>
                     <Link to="/signUpAdmin">
                         <button className="sign-up-admin-button">Sign Up</button>
                     </Link>
+
                 </form>
             </div>
         </div>

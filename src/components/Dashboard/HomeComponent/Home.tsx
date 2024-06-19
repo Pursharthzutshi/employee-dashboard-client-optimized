@@ -28,8 +28,8 @@ import DepartmentChart from "./HomeCharts/DepartmentChart/DepartmentChart";
 import { setDepartment } from "../../../ReduxSlicers/SignUpSlicer";
 import CardsDetails from "./CardsDetailsComponent/CardsDetails";
 import EmployeeOfTheMonth from "./EmployeeOfTheMonthComponent/EmployeeOfTheMonth";
+import WelcomeBack from "./WelcomeBackComponent/WelcomeBack";
 
-import image from "../../RegisterComponent/images/employee.png"
 // Register the components
 ChartJS.register(
     CategoryScale,
@@ -99,18 +99,10 @@ function Home() {
             <NavBar />
 
             <CheckInStatus />
-
-            <div className="div">
-                <div className="div-row">
-                    <img src={image} />
-                    <h3>Welcome Back Admin</h3>
-                </div>
-                <div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis accumsan elementum. Ut non fringilla tellus, vel iaculis orci. Vestibulum tristique finibus arcu id accumsan. Ut nec nisi vitae nulla posuere faucibus. Aliquam quis dui sit amet neque vestibulum lobortis. Curabitur lobortis nec augue ac euismod. Curabitur fermentum, tellus sed cursus ultrices, metus massa rutrum enim, at pretium mi lacus sed nulla. Sed sed ante risus.</p>
-                </div>
-            </div>
+            <WelcomeBack/>
 
             <CardsDetails />
+    
             <div className="chart-div-container">
 
                 <GenderTypeChart />

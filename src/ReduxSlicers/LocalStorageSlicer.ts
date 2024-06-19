@@ -7,7 +7,7 @@ type localStorageSlicerProps = {
     logOutStatus: String | null
     showLogOutButtonElements: String | null
     showLoggedInComponents: String | null
-
+    savedLoggedInName: String | null
 }
 
 const initialState: localStorageSlicerProps = {
@@ -15,8 +15,8 @@ const initialState: localStorageSlicerProps = {
     loggedInSavedUid: localStorage.getItem("loggedInSavedUid"),
     logOutStatus: localStorage.getItem("logOutButton"),
     showLogOutButtonElements: localStorage.getItem("logOutButton"),
-    showLoggedInComponents: localStorage.getItem("showLoggedInComponents")
-
+    showLoggedInComponents: localStorage.getItem("showLoggedInComponents"),
+    savedLoggedInName: localStorage.getItem("savedLoggedInName")
 }
 
 export const LocalStorageSlicer = createSlice({
@@ -58,10 +58,15 @@ export const LocalStorageSlicer = createSlice({
             localStorage.removeItem("logOutButton")
             localStorage.removeItem("showLoggedInComponents");
             localStorage.removeItem("adminStatus");
+            localStorage.removeItem("savedLoggedInName");
 
             state.logOutStatus = action.payload
 
         },
+        setSavedLoggedInName: (state, action) => {
+            state.savedLoggedInName = action.payload;
+            localStorage.setItem("savedLoggedInName", action.payload);
+        }
         // setShowLoggedInComponents: (state, action) => {
         //     state.showLoggedInComponents = action.payload
         //     localStorage.setItem("showLoggedInComponents", action.payload);
@@ -69,6 +74,6 @@ export const LocalStorageSlicer = createSlice({
     }
 })
 
-export const { setLoggedInSavedUid, setShowLogOutButtonElements, setLogOutStatus, setAdminStatus } = LocalStorageSlicer.actions;
+export const { setLoggedInSavedUid, setShowLogOutButtonElements, setLogOutStatus, setAdminStatus, setSavedLoggedInName } = LocalStorageSlicer.actions;
 
 export default LocalStorageSlicer.reducer

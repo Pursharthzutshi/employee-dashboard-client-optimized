@@ -2,37 +2,6 @@
     visibility: visible;
 } */
 
-.div,.div-row{
-    display: flex;
-}
-
-.div{
-    flex-direction:column;
-}
-
-.div{
-    padding: 2px 2px 2px 12px;
-    border-radius: 8px;
-    /* background: linear-gradient(to left,rgb(248, 254, 255),rgb(244, 253, 253)); */
-    margin-left: 10px;
-    margin-top: 10px;
-    width: 98.2%;
-    height: 27vh;
-    box-shadow: .2px .2px 2px .2px lightgray;
-}
-
-.div p{
-    line-height: 25px;
-    font-size: .9rem;
-    /* font-family: "Montserrat"; */
-    padding: 2px 12px 2px 1px;
-}
-
-.div img{
-    margin-top: 6px;
-    width: 5rem;
-    height: auto;
-}
 
 /* Dashboard code */
 .dashboard {

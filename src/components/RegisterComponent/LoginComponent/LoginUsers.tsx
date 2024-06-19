@@ -4,7 +4,8 @@ import { setUserLoggedInEmailId, setUserLoggedInEmailPassword } from "../../../R
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import ChangeLogInFormButtons from "./ChangeLogInFormButtons";
-import { setAdminStatus, setLoggedInSavedUid, setShowLogOutButtonElements } from "../../../ReduxSlicers/LocalStorageSlicer";
+import { setAdminStatus, setLoggedInSavedUid, setSavedLoggedInName, setShowLogOutButtonElements } from "../../../ReduxSlicers/LocalStorageSlicer";
+import { useState } from "react";
 
 const checkUserLoggedInAuthQuery = gql`
 mutation userLogin($userLoginParameters: createLoginInput!){
@@ -22,24 +23,34 @@ function LoginUsers() {
     const userLoggedinEmailId = useAppSelector((state) => state.LoginSlicer.userLoggedinEmailId)
     const userLoggedInEmailPassword = useAppSelector((state) => state.LoginSlicer.userLoggedinPassword)
 
+    const [loginErrorMessageStatus,setLoginErrorMessageStatus] = useState<Boolean>(false);
+    const [loginErrorMessage,setLoginErrorMessage] = useState("")
+
     const Dispatch = useAppDispatch()
     // const [] = useState("");
     // const [] = useState()
     const navigate = useNavigate()
 
     const [checkUserLoggedInAuth] = useMutation(checkUserLoggedInAuthQuery, {
-        onCompleted: (data) => {
+        onCompleted: (userLoginData) => {
 
-            if (data.createUserLogin.success === true) {
-                console.log(data)
+            if (userLoginData.createUserLogin.success === true) {
+                console.log(userLoginData)
                 navigate("/home")
+                Dispatch(setSavedLoggedInName(userLoginData.createUserLogin.name))
                 Dispatch(setAdminStatus(false));
                 Dispatch(setShowLogOutButtonElements(true));
-                Dispatch(setLoggedInSavedUid(data.createUserLogin.uid));
+                Dispatch(setLoggedInSavedUid(userLoginData.createUserLogin.uid));
+                setLoginErrorMessageStatus(false);
             } else {
+                setLoginErrorMessageStatus(true)
+                setLoginErrorMessage(userLoginData.createUserLogin.message)
                 Dispatch(setShowLogOutButtonElements(false));
             }
         },
+        onError:(ErrorMessage)=>{
+            console.log(ErrorMessage);
+        }
     });
 
 
@@ -51,7 +62,7 @@ function LoginUsers() {
 
     return (
         <div className="login-component">
-
+         
             <ChangeLogInFormButtons />
             <div className="login-left-sidebar-form-container">
 
@@ -73,7 +84,13 @@ function LoginUsers() {
                         })
                     }
                 }}>Login</button>
+                   <p>
+                {  loginErrorMessageStatus &&
+                <p>{loginErrorMessage}</p>
+                }
+            </p>
             </form>
+            
             </div>
         </div>
     )
