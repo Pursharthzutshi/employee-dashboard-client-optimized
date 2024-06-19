@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function DropDown({test}:any){
-    return(
+type testProps = {
+    test:Boolean
+}
+
+function DropDown({ test }: testProps) {
+
+    useEffect(()=>{
+        console.log(test)
+    })
+
+    return (
         <div>
-                       {
+            {
                 test && <div className="box">
                     <ul>
                         <Link className="links" to="/">My Profile</Link>

@@ -1,5 +1,5 @@
 export type EmployeesAccountDataProps = {
-    uid: any
+    uid: String
     name:String
     emailId:String
 }

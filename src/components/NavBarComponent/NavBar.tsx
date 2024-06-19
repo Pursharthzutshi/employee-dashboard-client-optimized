@@ -4,7 +4,7 @@ import DropDown from "../utils/DropDown";
 import "../NavBarComponent/NavBar.css"
 function NavBar() {
 
-    const [test, setTest] = useState(false);
+    const [test, setTest] = useState<Boolean>(false);
 
     const change = () => {
         setTest(!test)
