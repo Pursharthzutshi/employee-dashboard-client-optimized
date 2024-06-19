@@ -24,7 +24,7 @@ function App() {
   const logOutButton = useAppSelector((state) => state.LocalStorageSlicer.showLogOutButtonElements)
 
   useEffect(() => {
-    console.log('adminStatus from localStorage:', localStorage.getItem('adminStatus'));
+    // console.log('adminStatus from localStorage:', localStorage.getItem('adminStatus'));
   }, [adminStatus])
 
   return (

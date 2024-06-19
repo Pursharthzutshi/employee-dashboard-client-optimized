@@ -33,7 +33,7 @@ function GenderTypeChart() {
 
     scales: {
       x: {
-        // display: false
+        display: false
       },
       y: {
         display: false

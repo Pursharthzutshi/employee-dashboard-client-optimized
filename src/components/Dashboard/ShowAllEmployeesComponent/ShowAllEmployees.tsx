@@ -9,6 +9,14 @@ import NavBar from "../../NavBarComponent/NavBar";
 
 import "../ShowAllEmployeesComponent/ShowAllEmployees.css"
 
+const show_all_employees_data_query = gql`
+query fetchemployeesDataQuery{
+   showAllEmployee {
+   uid
+   name
+   emailId
+}
+}`
 
 const update_Employee_Of_The_Month_query = gql`
 mutation updateEmployeeOfTheMonth($updateEmployeeOfTheMonthParameters: updateEmployeeOfTheMonthInput!){
@@ -21,19 +29,15 @@ mutation updateEmployeeOfTheMonth($updateEmployeeOfTheMonthParameters: updateEmp
 
 function ShowAllEmployees() {
 
-    const [assignEmployeeOfTheMonth] = useMutation(update_Employee_Of_The_Month_query);
+    const [assignEmployeeOfTheMonth] = useMutation(update_Employee_Of_The_Month_query,({
+        onError:(err)=>{
+            console.log(err)
+        }
+    }));
 
     const searchFilter = useAppSelector((state) => state.SearchFilterSilcer.SearchFilter)
 
-    const show_all_employees_data_query = gql`
-         query fetchemployeesDataQuery{
-            showAllEmployee {
-            uid
-            name
-            emailId
-   }
-}`
-
+ 
     const Dispatch = useDispatch()
     const { data: ShowAllEmployeesData, loading } = useQuery(show_all_employees_data_query, {
         onCompleted: (data) => {

@@ -50,15 +50,12 @@ export const ChangeSignUpFormSlicer = createSlice({
         },
         setDepartmentCount: (state, action) => {
 
-            console.log(action.payload)
 
             if (action.payload.department === "HR Department") {
                 state.HRDepartment = state.HRDepartment + 1
-                console.log(action.payload)
             }
             else if (action.payload.department === "Software Department") {
                 state.softwareDepartment = state.softwareDepartment + 1
-                console.log(action.payload)
             }
             else if (action.payload.department === "Testing Department") {
                 state.testingDepartment = state.testingDepartment + 1

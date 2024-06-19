@@ -55,12 +55,14 @@ function LeftSidebar() {
                         <p >Add Employee</p>
 
                     </Link>
-                    <Link className="left-sidebar-links" to="/signup">
+                    {/* <Link className="left-sidebar-links" to="/signup">
                         <img className="left-sidebar-icon-image" src={settingsImage} />
                         <p >Settings</p>
 
-                    </Link>
+                    </Link> */}
                 </div>
+                <br></br>
+                <br></br>
                 <br></br>
                 {
                     showLogOutButtonElements ?

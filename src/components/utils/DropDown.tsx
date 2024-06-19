@@ -8,7 +8,7 @@ type testProps = {
 function DropDown({ test }: testProps) {
 
     useEffect(()=>{
-        console.log(test)
+        // console.log(test)
     })
 
     return (
